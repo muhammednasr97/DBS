@@ -1,0 +1,87 @@
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <title>Add Report</title>
+</head>
+
+<form  method="POST" action="" novalidate autocomplete="on" >
+    {% csrf_token %}
+<h1>Add Report</h1>
+<br/>
+<hr/>
+<div class="form-group row">
+<label for="colFormLabel" class="col-sm-2">Report ID</label>
+<textarea class="form-control col-sm-3" id="colFormLabel" rows="1"  wrap="hard" name="code" autocomplete="on"></textarea>
+</div>
+
+<div class="form-group row">
+<label for="colFormLabel" class="col-sm-2">Name</label>
+<textarea class="form-control col-sm-3" id="colFormLabel" rows="1"  wrap="hard" name="equipment_name" autocomplete="on"></textarea>
+</div>
+
+<div class="form-group row">
+<label class="col-sm-2" for="colFormLabel">Speciality</label>
+<select class="form-control col-sm-3" id="inlineFormCustomSelectPref" name="speciality">
+    <option selected>Choose Speciality...</option>
+    <option value="1">Cardiology</option>
+    <option value="2">Obstetrics/Gynecology</option>
+    <option value="3">NICU</option>
+    <option value="1">ENT</option>
+    <option value="2">Urology</option>
+    <option value="3">General Surgery</option>
+    <option value="1">General Hospital</option>
+    <option value="2">Clinical Laboratory</option>
+    <option value="3">Ophthalmology</option>
+    <option value="1">Physical Medicine</option>
+    <option value="2">Radiology</option>
+    <option value="3">Gastroenterology</option>
+    <option value="1">Emergency</option>
+    <option value="2">Anesthesiology</option>
+    <option value="3">Pulmonary Medicine</option>
+    <option value="1">ICU</option>
+    <option value="2">Pathology</option>
+    <option value="3">Neurology</option>
+</select>
+</div>
+
+<div class="form-group row">
+<label for="colFormLabel" class="col-sm-2">Purpose</label>
+<textarea class="form-control col-sm-3" id="colFormLabel" rows="5"  wrap="hard" name="purpose"></textarea>
+</div>
+
+<div class="form-group row">
+    <label for="colFormLabel" class="col-sm-2">Picture</label>
+    <input type="file" class="col-sm-3" id="exampleFormControlFile1" name="picture">
+</div>
+
+
+<div class=" form-group row related_widget_wrapper">
+<label for="colFormLabel" class="col-sm-2">General Specs</label>
+<select  name="general_specs" class="col-sm-3" id="id_general_specs" multiple >
+{% for item in gene_data.all %}
+<option>{{ item.name }}</option>
+{% endfor %}
+</select>
+
+<a  id="add_id_general_specs" href="http://127.0.0.1:8000/techspecs/addgeneralspecs/" target="_blank" title="Add another general_ specs"
+class="related-widget-wrapper-link add-related">
+    <img src="/media/media/icon-addlink.svg" alt="Add" style="vertical-align: middle"></a>
+</div>
+
+<div class="form-group row">
+<label for="colFormLabel" class="col-sm-2">Technical Specs</label>
+<select  name="technical_specs" class="col-sm-3" id="id_technical_specs" multiple >
+{% for item in tech_data.all %}
+<option>{{ item.name }}</option>
+{% endfor %}
+</select>
+<a  id="add_id_technical_specs"
+href="http://127.0.0.1:8000/techspecs/addtechnicalspecs/" target="_blank" title="Add another technical_ specs">
+    <img src="/media/media/icon-addlink.svg" alt="Add" style="vertical-align: middle"></a>
+</div>
+
+
+<div class="form-group row">
+<button type="submit" class="btn btn-success btn-block btn-lg col-sm-2"><i class="fas fa-database"></i>Add</button>
+</div>
+
+</form>
