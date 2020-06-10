@@ -1,0 +1,183 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+
+    <div class="site-navbar py-2" style="background: floralwhite">
+
+      <div class="search-wrap">
+        <div class="container">
+          <a href="#" class="search-close js-search-close"><span class="icon-close2"></span></a>
+          <form action="#" method="post">
+            <input type="text" class="form-control" placeholder="Search keyword and hit enter...">
+          </form>
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="d-flex align-items-center justify-content-between">
+          <div class="logo">
+            <div class="site-logo">
+              <a href="{% url 'home' %}" class="js-logo-clone">DBS</a>
+            </div>
+          </div>
+          <div class="main-nav d-none d-lg-block">
+            <nav class="site-navigation text-right text-md-center" role="navigation">
+              <ul class="site-menu js-clone-nav d-none d-lg-block">
+                <li class="active"><a href="{% url 'home' %}">Home</a></li>
+                <li><a href="{% url 'search' %}">Search</a></li>
+                <li><a href="{% url 'all_equipments' %}">Database</a></li>
+                <li><a href="{% url 'about' %}">About</a></li>
+              </ul>
+            </nav>
+          </div>
+          <div class="icons">
+            <a href="#" class="icons-btn d-inline-block js-search-open"><span class="icon-search"></span></a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+<!-- main page-->
+
+    <div class="site-blocks-cover" style="background-image: url({% static 'techspecs/images/Picture3.png' %});">
+      <div class="container">
+        <div class="row">
+          <div class="mx-auto order-lg-2 align-self-center">
+            <div class="site-block-cover-content text-center">
+              <h2 class="sub-title" >Effective Way to organize your Equipment Specifications</h2>
+              <h1>DBS for Medical Equipment Specs</h1>
+              <p>
+                <a href="{% url 'all_equipments' %}" class="btn btn-primary px-5 py-3">Show Equipment</a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="site-section" style="background: ghostwhite">
+      <div class="container">
+        <div class="row align-items-stretch section-overlap">
+          <div class="col-md-6 col-lg-4 mb-4 mb-lg-0">
+            <div class="banner-wrap bg-primary h-100">
+              <a  class="h-100">
+                <h5>Systematic Method</h5>
+                <p>NOT AD HOC METHOD
+                    <strong>Generalized form suitable with each Equipment to add a lot of Equipment easily with a standard way.</strong>
+                </p>
+              </a>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-4 mb-4 mb-lg-0">
+            <div class="banner-wrap h-100">
+              <a  class="h-100">
+                <h5>Coding System</h5>
+                <p>
+                  New Coding System
+                  <strong>Add our codes for each Equipment which has 3 parts <br/>(Equipment-Department-Generic number)</strong>
+                </p>
+              </a>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-4 mb-4 mb-lg-0">
+            <div class="banner-wrap bg-warning h-100">
+              <a  class="h-100">
+                <h5>Categories</h5>
+                <p>
+                  New Categories
+                  <strong>Creating new categories like <br/>(Facility level of care-Technology level)</strong>
+                </p>
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+
+    <div class="site-section" style="background: lightblue">
+      <div class="container">
+        <div class="row">
+          <div class="title-section text-center col-12">
+            <h2 class="text-uppercase" style="font-weight: bold;">Info</h2>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 block-3 products-wrap">
+            <div class="nonloop-block-3 no-direction owl-carousel">
+        
+              <div class="testimony">
+                <blockquote>
+                  <p >Abstract</p>
+                  <p>Generating medical equipment database to facilitate reaching sufficient data and features about thousands of medical equipment by simple
+                  keywords, that will save a lot of work hours and budgets</p>
+                </blockquote>
+              </div>
+
+             <div class="testimony">
+                <blockquote>
+                  <p >Problem Statement</p>
+                  <p>The non-availability of sufficient medical equipment data exept with forign currency that overburden the Egyptian customers.<br/>
+                   </p>
+                </blockquote>
+              </div>
+
+              <div class="testimony">
+                <blockquote>
+                  <!--<img src="{% static 'techspecs/images/person_2.jpg' %}" alt="Image" class="img-fluid w-25 mb-4 rounded-circle">-->
+                    <p >Objectives</p>
+                  <p>1- Simplifying the process of reaching classified medical equipment data.<br/>
+                      2- Providing medical entities with an updated system of medical specifications.<br/>
+                  3- Reducing the budget of Egyptian hospitals and ministry of health.</p>
+                </blockquote>
+              </div>
+
+        
+              <div class="testimony">
+                <blockquote>
+                  <p class="text-black">Target Customers</p>
+                  <p>1- Ministry of Health and Hospitals.<br/>
+                  2- Medical Equipment Planning Co.<br/>
+                  3- Engineering Consulting Offices.</p>
+                </blockquote>
+              </div>
+        
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+<!--
+    <div class="site-section bg-secondary bg-image" style="background-image: url({% static 'techspecs/images/bg_2.jpg'%});">
+      <div class="container">
+            <div class="col-lg-6 mb-5 mb-lg-0">
+
+              <a href="#" class="banner-1 h-100 d-flex" style="background-image: url({% static 'techspecs/images/bg_1.jpg' %});">
+
+                <div class="banner-1-inner align-self-center">
+                <h2>Pharma Products</h2>
+                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Molestiae ex ad minus rem odio voluptatem.
+                </p>
+              </div>
+            </a>
+          </div>
+
+          <div class="col-lg-6 mb-5 mb-lg-0">
+            <a href="#" class="banner-1 h-100 d-flex" style="background-image: url({% static 'techspecs/images/bg_2.jpg' %});">
+              <div class="banner-1-inner ml-auto  align-self-center">
+                <h2>Rated by Experts</h2>
+                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Molestiae ex ad minus rem odio voluptatem.
+                </p>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    -->
+{% endblock %}
+
+

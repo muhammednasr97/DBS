@@ -1,13 +1,82 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>All Equipments</title>
-</head>
-<body>
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="site-navbar py-2" style="background: lightgray">
+
+      <div class="search-wrap">
+        <div class="container">
+          <a href="#" class="search-close js-search-close"><span class="icon-close2"></span></a>
+          <form action="#" method="post">
+            <input type="text" class="form-control" placeholder="Search keyword and hit enter...">
+          </form>
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="d-flex align-items-center justify-content-between">
+          <div class="logo">
+            <div class="site-logo">
+              <a href="{% url 'home' %}" class="js-logo-clone">DBS</a>
+            </div>
+          </div>
+
+            <div class="main-nav d-none d-lg-block">
+            <nav class="site-navigation text-right text-md-center" role="navigation">
+              <ul class="site-menu js-clone-nav d-none d-lg-block">
+                <li><a href="{% url 'home' %}">Home</a></li>
+                <li><a href="{% url 'search' %}">Search</a></li>
+                <li class="active"><a href="{% url 'all_equipments' %}">Database</a></li>
+                <li><a href="{% url 'about' %}">About</a></li>
+              </ul>
+            </nav>
+          </div>
+            <div class="icons">
+            <a href="#" class="icons-btn d-inline-block js-search-open"><span class="icon-search"></span></a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="py-3" >
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 mb-0">
+            <a href="{% url 'home' %}" style="color: #1d5987">Home</a> <span class="mx-2 mb-0" >/</span>
+            <strong class="text-black">Database</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+
+<div class="site-section text-body" >
+<div class="container">
+<h2 class="text-black">
+    <div class="row">
+    <label class="col-sm-8"><b>Medical Equipments</b></label>
+        <button class="col-sm-3 btn btn-black" onclick="document.location.href = 'http://127.0.0.1:8000/techspecs/addequipments/'">Add New Equipment</button>
+    </div>
+</h2>
+<br/>
+<br/>
+
+<form style="border: 2px gray solid; border-radius: 15px; padding: 20px">
 {% for item in all %}
-    {{ item.equipment_name }}
+
+  <div class=" row " >
+    <lable class="col-sm-8">
+    <a href="/techspecs/search/{{ item.report_id }}" target="_top"><u class="text">{{item.equipment_name.equipment_name}}</u></a>
+    </lable>
+    <div class=" col-sm-3">
+              <button type="button" class="button btn " onclick="document.location.href = 'http://127.0.0.1:8000/techspecs/update/{{ item.report_id }}'">Update</button>
+              <button type="button" class="button btn" onclick="document.location.href = 'http://127.0.0.1:8000/techspecs/delete/{{ item.report_id }}'">Delete</button>
+    </div>
+  </div>
     <br/>
 {% endfor %}
-</body>
-</html>
+</form>
+
+
+</div>
+</div>
+
+{% endblock %}

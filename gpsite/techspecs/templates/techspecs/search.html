@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="site-navbar py-2" style="background: lightgray">
+
+      <div class="search-wrap">
+        <div class="container">
+          <a href="#" class="search-close js-search-close"><span class="icon-close2"></span></a>
+          <form action="#" method="post">
+            <input type="text" class="form-control" placeholder="Search keyword and hit enter...">
+          </form>
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="d-flex align-items-center justify-content-between">
+          <div class="logo">
+            <div class="site-logo">
+              <a href="{% url 'home' %}" class="js-logo-clone">DBS</a>
+            </div>
+          </div>
+
+    <div class="main-nav d-none d-lg-block">
+            <nav class="site-navigation text-right text-md-center" role="navigation">
+              <ul class="site-menu js-clone-nav d-none d-lg-block">
+                <li><a href="{% url 'home' %}">Home</a></li>
+                <li class="active"><a href="{% url 'search' %}">Search</a></li>
+                <li><a href="{% url 'all_equipments' %}">Database</a></li>
+                <li><a href="{% url 'about' %}">About</a></li>
+              </ul>
+            </nav>
+      </div>
+    <div class="icons">
+            <a href="#" class="icons-btn d-inline-block js-search-open"><span class="icon-search"></span></a>
+          </div>
+        </div>
+      </div>
+</div>
+
+ <!--main page-->
+
+    <div class="bg-light py-3">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 mb-0">
+            <a href="{% url 'home' %}" style="color: #1d5987">Home</a> <span class="mx-2 mb-0">/</span>
+              <strong class="text-black">Search</strong></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="site-section bg-light" >
+      <div class="container">
+
+<form  method="GET" >
+<input type="text"  class="input  col-sm-6" style="text-transform: lowercase;text-align: left" name="q" value="{{request.GET.q}}" placeholder="Search"/>
+<input type="submit" style="border-radius: 25px" class="btn btn-black" name="submit" value="Search"/>
+</form>
+
+<!-- forrrrrrrrrr user if enter 'all' in the search -->
+{% for result in all %}
+    <br/>
+<a href="/techspecs/search/{{ result.report_id }}" target="_top" class="text"><u >{{result.equipment_name}}</u></a>
+    <br/>
+{% endfor %}
+
+<!-- forrrrrrrrrr user if enter any text in the search -->
+
+{% if submitbutton == 'Search' and request.GET.q != '' %}
+    {% if results %}
+        <br/>
+        <h4 class="text-black" style="font-style: italic">Results for <b>"{{ request.GET.q }}"</b> </h4>
+        <br/>
+        {% for result in results %}
+        <a href="/techspecs/search/{{ result.report_id }}" target="_blank" class="text"><u >{{result.equipment_name}}</u></a>
+        {% endfor %}
+
+    {% else %}
+<p class="text-black" style="font-style: italic; font-weight: bold">No search results for this text.</p>
+    {% endif %}
+
+{% endif %}
+
+
+      </div>
+    </div>
+
+{% endblock %}
+

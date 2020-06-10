@@ -1,0 +1,222 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+
+
+<div class="site-navbar py-2" style="background: lightgray">
+
+      <div class="search-wrap">
+        <div class="container">
+          <a href="#" class="search-close js-search-close"><span class="icon-close2"></span></a>
+          <form action="#" method="post">
+            <input type="text" class="form-control" placeholder="Search keyword and hit enter...">
+          </form>
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="d-flex align-items-center justify-content-between">
+          <div class="logo">
+            <div class="site-logo">
+              <a href="{% url 'home' %}" class="js-logo-clone">DBS</a>
+            </div>
+          </div>
+            <div class="main-nav d-none d-lg-block">
+            <nav class="site-navigation text-right text-md-center" role="navigation">
+              <ul class="site-menu js-clone-nav d-none d-lg-block">
+                <li><a href="{% url 'home' %}">Home</a></li>
+                <li><a href="{% url 'search' %}">Search</a></li>
+                <li class="active"><a href="{% url 'all_equipments' %}">Database</a></li>
+                <li><a href="{% url 'about' %}">About</a></li>
+              </ul>
+            </nav>
+  </div>
+            <div class="icons">
+            <a href="#" class="icons-btn d-inline-block js-search-open"><span class="icon-search"></span></a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="bg-light py-3">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 mb-0">
+            <a href="{% url 'home' %}" style="color: #1d5987">Home</a> <span class="mx-2 mb-0">/</span>
+          <a href="{% url 'all_equipments' %}" style="color: #1d5987">Database</a> <span class="mx-2 mb-0">/</span>
+            <strong class="text-black">Update Equipment</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+
+<!--form-->
+<div class="site-section text-black "  >
+  <div class="container">
+
+          <h2 class="h3 mb-5 text-black"><b>Update Equipment</b></h2>
+
+<form  method="POST" action="{% url 'edit' device.report_id %}"
+       style="border: 2px solid lightgray; padding: 50px ;background: lightgray" enctype="multipart/form-data"  >
+    {% csrf_token %}
+
+<div class="form-group row">
+<label for="colFormLabel" class="col-sm-3 text_form">Code</label>
+    <input type="text" class="col-sm-3 input_form" id="exampleFormControlFile1" name="code" value="{{device.equipment_name.code}}">
+</div>
+
+<div class="form-group row">
+<label for="colFormLabel" class="col-sm-3 text_form">Name</label>
+    <input type="text" class="col-sm-3 input_form" id="exampleFormControlFile1" name="equipment_name" value="{{device.equipment_name.equipment_name}}">
+</div>
+
+<div class="form-group row">
+<label class="col-sm-3 text_form" for="colFormLabel">Speciality</label>
+<select class="col-sm-3 select" id="inlineFormCustomSelectPref" name="speciality" >
+    <option  selected>{{ device.equipment_name.speciality }}</option>
+    <option value="Cardiology">Cardiology</option>
+    <option value="Obstetrics/Gynecology">Obstetrics/Gynecology</option>
+    <option value="NICU">NICU</option>
+    <option value="ENT">ENT</option>
+    <option value="Urology">Urology</option>
+    <option value="General Surgery">General Surgery</option>
+    <option value="General Hospital">General Hospital</option>
+    <option value="Clinical Laboratory">Clinical Laboratory</option>
+    <option value="Ophthalmology">Ophthalmology</option>
+    <option value="Physical Medicine">Physical Medicine</option>
+    <option value="Radiology">Radiology</option>
+    <option value="Gastroenterology">Gastroenterology</option>
+    <option value="Emergency">Emergency</option>
+    <option value="Anesthesiology">Anesthesiology</option>
+    <option value="Pulmonary Medicine">Pulmonary Medicine</option>
+    <option value="ICU1">ICU</option>
+    <option value="Pathology">Pathology</option>
+    <option value="Neurology3">Neurology</option>
+</select>
+</div>
+
+<div class="form-group row">
+<label for="colFormLabel" class="col-sm-3 text_form">Purpose</label>
+<textarea  class="input_form col-sm-3" id="colFormLabel" rows="5"  wrap="hard" name="purpose" >{{device.equipment_name.purpose}}</textarea>
+</div>
+
+<div class="form-group row">
+<label for="colFormLabel" class="col-sm-3 text_form">Technology Level</label>
+    <input type="text" class="col-sm-3 input_form" id="exampleFormControlFile1" name="technology_level" value="{{device.technology_level}}" >
+</div>
+
+<div class="form-group row">
+<label for="colFormLabel" class="col-sm-3 text_form">Facility Level</label>
+    <input type="text" class="col-sm-3 input_form" id="exampleFormControlFile1" name="facility_level" value="{{device.facility_level}}">
+</div>
+
+<div class="form-group row">
+<label for="colFormLabel" class="col-sm-3 text_form">Addition Date</label>
+    <input type="text" class="col-sm-3 input_form" id="exampleFormControlFile1" name="addition_date" value="{{device.addition_date}}">
+</div>
+
+<div class="form-group row ">
+<label for="colFormLabel" class="col-sm-3 text_form">Modification Date</label>
+    <input type="text" class="col-sm-3 input_form" id="exampleFormControlFile1" name="modification_date" value="{{ device.modification_date }}">
+</div>
+
+<div class="form-group row" >
+    <label for="colFormLabel" class="col-sm-3 text_form">Picture</label>
+    <input type="file"  id="pic" name="picture" >
+    <img src="/media/{{ device.equipment_name.picture }}" class="card">
+
+</div>
+<hr style="border-width: 2px"/>
+<p class="text_form">General Specs</p>
+<div class="input_fields_wrap_general ">
+{% for item in device.equipment_name.general_specs.all %}
+    <div class="form-group row col-md-12">
+            <input class="col-sm-3 input_form" id="exampleFormControlFile1" name="gene_name" value="{{item.name}}" placeholder="Name">
+            <input class="col-sm-3 input_form" id="exampleFormControlFile2" name="gene_value" value="{{item.value}}" placeholder="Value">
+            <label href="#" class="remove_field_general col-sm-3 align-middle"
+                   style="color: black; text-decoration: underline; display: block; line-height: 50px">Remove</label>
+    </div>
+{% endfor %}
+</div>
+<a href="#" class="add_field_button_general  " style="color: black"><u>Add More Specs</u></a>
+
+<hr style="border-width: 2px"/>
+<p class="text_form">Technical Specs</p>
+<div class="input_fields_wrap_technical">
+{% for item in device.equipment_name.technical_specs.all %}
+    <div class="form-group row col-md-12">
+            <input class="col-sm-3 input_form" id="exampleFormControlFile3" name="tech_name" value="{{item.name}}" placeholder="Name">
+            <input  class="col-sm-3 input_form" id="exampleFormControlFile4" name="tech_value" value="{{item.value}}" placeholder="Value">
+            <label href="#" class="remove_field_technical col-sm-3 align-middle"
+                   style="color: black; text-decoration: underline; display: block; line-height: 50px">Remove</label>
+    </div>
+{% endfor %}
+</div>
+<a href="#" class="add_field_button_technical " style="color: black"><u>Add More Specs</u></a>
+<br/><br/>
+<div class="form-group row ">
+<button  type="submit" class="btn btn-black btn-lg col-sm-2" style="left: 800px"><i class="fas fa-database"></i>Update</button>
+</div>
+
+</form>
+          
+        </div>
+      </div>
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script>
+// function for general specs
+<!-- function for general specs -->
+	$(document).ready(function() {
+    var max_fields      = 100; //maximum input boxes allowed
+    var wrapper         = $(".input_fields_wrap_general"); //Fields wrapper
+    var add_button      = $(".add_field_button_general"); //Add button ID
+    var x = 1; //initlal text box count
+   $(add_button).click(function(e){ //on add input button click
+        e.preventDefault();
+        if(x < max_fields){ //max input box allowed
+		     //text box increment
+            $(wrapper).append(
+                '<div class="form-group row col-md-12 "><input type="text" class="col-sm-3 input_form" id="exampleFormControlFile1" name="gene_name" placeholder="Name">' +
+                '<input type="text" class="col-sm-3 input_form" id="exampleFormControlFile1" name="gene_value" placeholder="Value">' +
+                '<label href="#" class="remove_field_general col-sm-3 align-middle"\n' +
+                '                   style="color: black; text-decoration: underline; display: block; line-height: 50px">Remove</label>');
+            x++;
+	  }
+    });
+    $(wrapper).on("click",".remove_field_general", function(e){ //user click on remove text
+		e.preventDefault();
+		$(this).parent('div').remove();
+		x--;
+    })
+});
+
+<!-- function for technical specs -->
+$(document).ready(function() {
+    var max_fields      = 100; //maximum input boxes allowed
+    var wrapper         = $(".input_fields_wrap_technical"); //Fields wrapper
+    var add_button      = $(".add_field_button_technical"); //Add button ID
+    var x = 1; //initlal text box count
+   $(add_button).click(function(e){ //on add input button click
+        e.preventDefault();
+        if(x < max_fields){ //max input box allowed
+		     //text box increment
+            $(wrapper).append(
+                '<div class="form-group row col-md-12" ><input type="text" class="col-sm-3 input_form" id="exampleFormControlFile1" name="tech_name" placeholder="Name">' +
+                '<input type="text" class="col-sm-3 input_form" id="exampleFormControlFile1" name="tech_value" placeholder="Value">' +
+                '<label href="#" class="remove_field_technical col-sm-3 align-middle"\n' +
+                '                   style="color: black; text-decoration: underline; display: block; line-height: 50px">Remove</label>');
+            x++;
+	  }
+    });
+    $(wrapper).on("click",".remove_field_technical", function(e){ //user click on remove text
+		e.preventDefault();
+		$(this).parent('div').remove();
+		x--;
+    })
+});
+</script>
+
+      
+{% endblock %}

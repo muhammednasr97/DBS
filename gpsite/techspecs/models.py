@@ -23,7 +23,7 @@ class Equipment(models.Model):
     equipment_name = models.CharField(max_length=50)
     purpose = models.TextField()
     speciality = models.CharField(max_length=25)
-    picture = models.ImageField(upload_to='media/', max_length=1000)
+    picture = models.ImageField(upload_to='media/', height_field=None, width_field=None, max_length=1000, default='val10')
     general_specs = models.ManyToManyField(General_Specs, blank=True)
     technical_specs = models.ManyToManyField(Technical_Specs, blank=True)
 
@@ -33,10 +33,10 @@ class Equipment(models.Model):
 
 
 class Technical_Report(models.Model):
-    report_id = models.IntegerField(default=0, primary_key=True)
+    report_id = models.CharField(max_length=30, default=0, primary_key=True)
     equipment_name = models.ForeignKey(Equipment, on_delete=models.CASCADE, blank=True, null=True)
-    modification_date = models.DateField(auto_now=False, auto_now_add=False)
-    addition_date = models.DateField(auto_now=False, auto_now_add=False)
+    modification_date = models.CharField(max_length=20)
+    addition_date = models.CharField(max_length=20)
     technology_level = models.CharField(max_length=10)
     facility_level = models.CharField(max_length=10)
 

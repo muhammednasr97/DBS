@@ -1,0 +1,147 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="site-navbar py-2" style="background: lightgray">
+
+      <div class="search-wrap" >
+        <div class="container">
+          <a href="#" class="search-close js-search-close"><span class="icon-close2"></span></a>
+          <form action="#" method="post">
+            <input type="text" class="form-control" placeholder="Search keyword and hit enter...">
+          </form>
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="d-flex align-items-center justify-content-between">
+          <div class="logo">
+            <div class="site-logo">
+              <a href="{% url 'home' %}" class="js-logo-clone">DBS</a>
+            </div>
+          </div>
+
+            <div class="main-nav d-none d-lg-block">
+            <nav class="site-navigation text-right text-md-center" role="navigation">
+              <ul class="site-menu js-clone-nav d-none d-lg-block">
+                <li><a href="{% url 'home' %}">Home</a></li>
+                <li><a href="{% url 'search' %}">Search</a></li>
+                <li><a href="{% url 'all_equipments' %}">Database</a></li>
+                <li class="active"><a href="{% url 'about' %}">About</a></li>
+              </ul>
+            </nav>
+          </div>
+            <div class="icons">
+            <a href="#" class="icons-btn d-inline-block js-search-open"><span class="icon-search"></span></a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+<!-- main page-->
+
+
+    <div class="bg-light py-3">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 mb-0">
+            <a href="{% url 'home' %}" style="color: #1d5987">Home</a> <span class="mx-2 mb-0">/</span>
+            <strong class="text-black">About</strong>
+            </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="site-blocks-cover inner-page" style="background-image: url({% static 'techspecs/images/Picture2.png' %});">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-7 mx-auto align-self-center">
+            <div class=" text-center">
+              <h1>About Us</h1>
+              <p> Graduation Project<br/> Senior Students at Faculty of Engineering Cairo University<br/>Biomedical Engineering Department  </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+    <div class="site-section bg-light custom-border-bottom" data-aos="fade">
+      <div class="container">
+        <div class="row justify-content-center mb-5">
+          <div class="col-md-7 site-section-heading text-center pt-4">
+            <h2>The Team</h2>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 col-lg-6 mb-5">
+    
+            <div class="block-38 text-center">
+              <div class="block-38-img">
+                <div class="block-38-header">
+                  <img src="{% static 'techspecs/images/hamza.jpg' %}" alt="Image placeholder" class="mb-4">
+                  <h3 class="block-38-heading h4">Ahmed Hamza</h3>
+                  <p class="block-38-subheading">Data collecting and classification<br/>Front-End</p>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-6 mb-5">
+            <div class="block-38 text-center">
+              <div class="block-38-img">
+                <div class="block-38-header">
+                  <img src="{% static 'techspecs/images/jo.png' %}" alt="Image placeholder" class="mb-4">
+                  <h3 class="block-38-heading h4">Youssef Ahmed</h3>
+                  <p class="block-38-subheading">Data collecting and classification<br/>Front-End</p>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-6 mb-5">
+            <div class="block-38 text-center">
+              <div class="block-38-img">
+                <div class="block-38-header">
+                  <img src="{% static 'techspecs/images/beshoy.png' %}" alt="Image placeholder" class="mb-4">
+                  <h3 class="block-38-heading h4">Beshoy Emad</h3>
+                  <p class="block-38-subheading">Data collecting and classification<br/>Back-End</p>
+                </div>
+
+              </div>
+            </div>
+          </div>
+            <div class="col-md-6 col-lg-6 mb-5">
+            <div class="block-38 text-center">
+              <div class="block-38-img">
+                <div class="block-38-header">
+                  <img src="{% static 'techspecs/images/fawzy.png' %}" alt="Image placeholder" class="mb-4">
+                  <h3 class="block-38-heading h4"> Muhammed Fawzy</h3>
+                  <p class="block-38-subheading">Data collecting and classification<br/>Documentations and Paper</p>
+                </div>
+                <div class="block-38-body">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-6 mb-5">
+            <div class="block-38 text-center">
+              <div class="block-38-img">
+                <div class="block-38-header">
+                  <img src="{% static 'techspecs/images/nasr.png' %}" alt="Image placeholder" class="mb-4">
+                  <h3 class="block-38-heading h4">Muhammed Nasr</h3>
+                  <p class="block-38-subheading">Data collecting and classification<br/>Back-End<br/>Database Models</p>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+{% endblock %}
