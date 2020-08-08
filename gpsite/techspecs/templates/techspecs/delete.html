@@ -30,7 +30,9 @@
             </nav>
           </div>
             <div class="icons">
-            <a href="#" class="icons-btn d-inline-block js-search-open"><span class="icon-search"></span></a>
+            <lable>
+
+            </lable>
           </div>
         </div>
       </div>
@@ -55,15 +57,15 @@
 <div class="container">
 <h2 class="text-black">
     <b>Delete Equipment</b></h2><br/>
-    <p class="text-black">Are you sure you want to delete <b>"{{ device.equipment_name.equipment_name }}"</b></p>
+    <p class="text-black">Are you sure you want to delete <b>"{{ device.equipment_name }}"</b></p>
 <br/>
 
 
-<form method="post" action="{% url 'delete' device.report_id %}">
+<form method="post" action="{% url 'delete' device.id %}">
         {% csrf_token %}
 <div class=" col-sm-6">
-        <button type="submit" class="button " onclick="document.location.href = 'http://127.0.0.1:8000/techspecs/allequipments/'">Confirm</button>
-          <button type="button" class="button " onclick="document.location.href = 'http://127.0.0.1:8000/techspecs/allequipments/'" >Cancel</button>
+        <button type="submit" class="button btn" onclick="document.location.href = 'http://127.0.0.1:8000/techspecs/allequipments/'">Confirm</button>
+          <button type="button" class="button btn" onclick="document.location.href = 'http://127.0.0.1:8000/techspecs/allequipments/'" >Cancel</button>
 </div>
 </form>
 

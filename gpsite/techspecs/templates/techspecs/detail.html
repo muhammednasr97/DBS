@@ -62,29 +62,29 @@
 
 
 <form class="text-black" style="border: 2px solid lightgray; padding: 50px ;background: lightgray">
+
+
 <!-- here are the image and form for display the equipment details -->
-
-
 <div class="card" >
-  <img src="{{ device.equipment_name.picture.url }}" class="card-img" alt="Image" style="border-radius: 20px">
+  <img src="{{ device.picture.url }}" class="card-img" alt="Image" style="border-radius: 20px">
   <div class="card-body container" style="background: gray;border-radius: 15px;" >
-    <p class=" text_form"  style="color: #0b0b0b; font-size: 18px">{{ device.equipment_name.purpose }}</p>
+    <p class=" text_form"  style="color: #0b0b0b; font-size: 18px">{{ device.purpose }}</p>
   </div>
 </div>
 
 <div class="form-group row ">
 <label for="colFormLabel" class="col-sm-3 text_form">Code</label>
-<textarea class="form-control col-sm-3 text-black input_form" id="colFormLabel" rows="1" readonly wrap="hard">{{ device.equipment_name.code }}</textarea>
+<textarea class="form-control col-sm-3 text-black input_form" id="colFormLabel" rows="1" readonly wrap="hard">{{ device.code }}</textarea>
 </div>
 
 <div class="form-group row">
 <label for="colFormLabel" class="col-sm-3 text_form">Name</label>
-<textarea class="form-control col-sm-3 text-black input_form" id="colFormLabel" rows="1" readonly wrap="hard" >{{ device.equipment_name.equipment_name }}</textarea>
+<textarea class="form-control col-sm-3 text-black input_form" id="colFormLabel" rows="1" readonly wrap="hard" >{{ device.equipment_name }}</textarea>
 </div>
 
 <div class="form-group row">
 <label for="colFormLabel" class="col-sm-3 text_form">Speciality</label>
-<textarea class="form-control col-sm-3 text-black input_form" id="colFormLabel" rows="1" readonly wrap="hard">{{ device.equipment_name.speciality }}</textarea>
+<textarea class="form-control col-sm-3 text-black input_form" id="colFormLabel" rows="1" readonly wrap="hard">{{ device.speciality }}</textarea>
 </div>
 
 
@@ -109,9 +109,14 @@
 <textarea class="form-control col-sm-3 text-black input_form" id="colFormLabel" rows="1" readonly wrap="hard">{{ device.modification_date }}</textarea>
 </div>
 
+<div class="form-group row ">
+<label for="colFormLabel" class="col-sm-3 text_form">Report Version</label>
+<textarea class="form-control col-sm-3 text-black input_form" id="colFormLabel" rows="1" readonly wrap="hard">{{ device.version }}</textarea>
+</div>
+
 <h2  style="font-weight: bold; font-size: 30px">General Specs</h2>
 <hr style="border: 1px solid gray; width: 13cm; margin: 0px "/><br/>
-{% for item in device.equipment_name.general_specs.all %}
+{% for item in device.general_specs.all %}
     <div class="form-group row">
     <label for="colFormLabel" class="col-sm-3 text_form">{{item.name}}</label>
     <textarea class="form-control col-sm-3 text-black input_form" id="colFormLabel" rows="1" readonly wrap="hard">{{ item.value }}</textarea>
@@ -122,7 +127,7 @@
 
 <h2  style="font-weight: bold; font-size: 30px">Technical specs</h2>
 <hr style="border: 1px solid gray; width: 13cm; margin: 0px "/><br/>
-{% for item in device.equipment_name.technical_specs.all %}
+{% for item in device.technical_specs.all %}
 
     <div class="form-group row">
     <label for="colFormLabel" class="col-sm-3 text_form">{{item.name}}</label>
@@ -130,6 +135,11 @@
     </div>
 {% endfor %}
 </form>
+<br><br>
+
+<button type="submit" class="button btn col-sm-3 " style="font-weight: bold ; background: black; border: black; color: white"
+        onclick="document.location.href = 'http://127.0.0.1:8000/techspecs/pdf/{{ device.id}}'">Print</button>
+
 </div>
 </div>
 

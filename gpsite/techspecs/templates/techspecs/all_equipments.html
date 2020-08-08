@@ -31,7 +31,9 @@
             </nav>
           </div>
             <div class="icons">
-            <a href="#" class="icons-btn d-inline-block js-search-open"><span class="icon-search"></span></a>
+            <lable>
+
+            </lable>
           </div>
         </div>
       </div>
@@ -63,12 +65,15 @@
 {% for item in all %}
 
   <div class=" row " >
-    <lable class="col-sm-8">
-    <a href="/techspecs/search/{{ item.report_id }}" target="_top"><u class="text">{{item.equipment_name.equipment_name}}</u></a>
+    <lable class="col-sm-6">
+    <a href="/techspecs/search/{{ item.id }}" target="_top"><u class="text">{{item.equipment_name}}</u></a>
     </lable>
-    <div class=" col-sm-3">
-              <button type="button" class="button btn " onclick="document.location.href = 'http://127.0.0.1:8000/techspecs/update/{{ item.report_id }}'">Update</button>
-              <button type="button" class="button btn" onclick="document.location.href = 'http://127.0.0.1:8000/techspecs/delete/{{ item.report_id }}'">Delete</button>
+    <div class=" col-sm-6">
+              <button type="button" class="button btn " onclick="document.location.href = 'http://127.0.0.1:8000/techspecs/update/{{ item.id }}'">Update</button>
+              <button type="button" class="button btn" onclick="document.location.href = 'http://127.0.0.1:8000/techspecs/delete/{{ item.id }}'">Delete</button>
+              <button type="button" class="button btn"
+                      onclick="document.location.href = 'http://127.0.0.1:8000/techspecs/compare/{{ item.id}}'">Compare last 2 versions</button>
+
     </div>
   </div>
     <br/>

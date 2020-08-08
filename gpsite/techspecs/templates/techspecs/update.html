@@ -7,7 +7,9 @@
 
       <div class="search-wrap">
         <div class="container">
-          <a href="#" class="search-close js-search-close"><span class="icon-close2"></span></a>
+          <label>
+
+          </label>
           <form action="#" method="post">
             <input type="text" class="form-control" placeholder="Search keyword and hit enter...">
           </form>
@@ -56,24 +58,29 @@
 
           <h2 class="h3 mb-5 text-black"><b>Update Equipment</b></h2>
 
-<form  method="POST" action="{% url 'edit' device.report_id %}"
+<form  method="POST" id="form-id" action="{% url 'edit' device.id device.version%}"
        style="border: 2px solid lightgray; padding: 50px ;background: lightgray" enctype="multipart/form-data"  >
     {% csrf_token %}
-
+<!--
+<div class="form-group row">
+<label for="colFormLabel" class="col-sm-3 text_form">Report ID</label>
+    <input type="text" class="col-sm-3 input_form" id="exampleFormControlFile1" name="id" value="{{device.id}}" readonly>
+</div>
+-->
 <div class="form-group row">
 <label for="colFormLabel" class="col-sm-3 text_form">Code</label>
-    <input type="text" class="col-sm-3 input_form" id="exampleFormControlFile1" name="code" value="{{device.equipment_name.code}}">
+    <input type="text" class="col-sm-3 input_form" id="exampleFormControlFile1" name="code" value="{{device.code}}" >
 </div>
 
 <div class="form-group row">
 <label for="colFormLabel" class="col-sm-3 text_form">Name</label>
-    <input type="text" class="col-sm-3 input_form" id="exampleFormControlFile1" name="equipment_name" value="{{device.equipment_name.equipment_name}}">
+    <input type="text" class="col-sm-3 input_form" id="exampleFormControlFile1" name="equipment_name" value="{{device.equipment_name}}">
 </div>
 
 <div class="form-group row">
 <label class="col-sm-3 text_form" for="colFormLabel">Speciality</label>
 <select class="col-sm-3 select" id="inlineFormCustomSelectPref" name="speciality" >
-    <option  selected>{{ device.equipment_name.speciality }}</option>
+    <option  selected>{{ device.speciality }}</option>
     <option value="Cardiology">Cardiology</option>
     <option value="Obstetrics/Gynecology">Obstetrics/Gynecology</option>
     <option value="NICU">NICU</option>
@@ -97,7 +104,7 @@
 
 <div class="form-group row">
 <label for="colFormLabel" class="col-sm-3 text_form">Purpose</label>
-<textarea  class="input_form col-sm-3" id="colFormLabel" rows="5"  wrap="hard" name="purpose" >{{device.equipment_name.purpose}}</textarea>
+<textarea  class="input_form col-sm-3" id="colFormLabel" rows="5"  wrap="hard" name="purpose" >{{device.purpose}}</textarea>
 </div>
 
 <div class="form-group row">
@@ -123,13 +130,13 @@
 <div class="form-group row" >
     <label for="colFormLabel" class="col-sm-3 text_form">Picture</label>
     <input type="file"  id="pic" name="picture" >
-    <img src="/media/{{ device.equipment_name.picture }}" class="card">
+    <img src="/media/{{ device.picture }}" class="card">
 
 </div>
 <hr style="border-width: 2px"/>
 <p class="text_form">General Specs</p>
 <div class="input_fields_wrap_general ">
-{% for item in device.equipment_name.general_specs.all %}
+{% for item in device.general_specs.all %}
     <div class="form-group row col-md-12">
             <input class="col-sm-3 input_form" id="exampleFormControlFile1" name="gene_name" value="{{item.name}}" placeholder="Name">
             <input class="col-sm-3 input_form" id="exampleFormControlFile2" name="gene_value" value="{{item.value}}" placeholder="Value">
@@ -143,7 +150,7 @@
 <hr style="border-width: 2px"/>
 <p class="text_form">Technical Specs</p>
 <div class="input_fields_wrap_technical">
-{% for item in device.equipment_name.technical_specs.all %}
+{% for item in device.technical_specs.all %}
     <div class="form-group row col-md-12">
             <input class="col-sm-3 input_form" id="exampleFormControlFile3" name="tech_name" value="{{item.name}}" placeholder="Name">
             <input  class="col-sm-3 input_form" id="exampleFormControlFile4" name="tech_value" value="{{item.value}}" placeholder="Value">
@@ -154,8 +161,9 @@
 </div>
 <a href="#" class="add_field_button_technical " style="color: black"><u>Add More Specs</u></a>
 <br/><br/>
+
 <div class="form-group row ">
-<button  type="submit" class="btn btn-black btn-lg col-sm-2" style="left: 800px"><i class="fas fa-database"></i>Update</button>
+<button  type="submit" class="btn btn-black btn-lg col-sm-2"><i class="fas fa-database"></i>Update</button>
 </div>
 
 </form>
@@ -216,6 +224,7 @@ $(document).ready(function() {
 		x--;
     })
 });
+
 </script>
 
       

@@ -31,7 +31,9 @@
             </nav>
             </div>
             <div class="icons">
-            <a href="#" class="icons-btn d-inline-block js-search-open"><span class="icon-search"></span></a>
+                <lable>
+
+                </lable>
           </div>
         </div>
       </div>
@@ -55,7 +57,9 @@
 <div class="site-section text-black " >
   <div class="container">
 
-          <h2 class="h3 mb-5 text-black"><b>Add Equipment</b></h2>
+      <h class="h1 mb-5 text-black"><b>Add Equipment</b></h>
+      <br>
+      <p class=" text-black">Fields with ' * ' are mandatory</p>
 
 <form  method="POST" action="{% url 'add_equipments' %}" style="border: 2px solid lightgray; padding: 50px ;background: lightgray"
        enctype="multipart/form-data" >
@@ -63,18 +67,15 @@
     {% csrf_token %}
 
 <div class="form-group row">
-<label for="colFormLabel" class="col-sm-3 text_form">Report ID</label>
-    <input type="text" class="col-sm-3 input_form" id="exampleFormControlFile1" name="report_id" placeholder="The same as code">
-</div>
-
-<div class="form-group row">
 <label for="colFormLabel" class="col-sm-3 text_form">Code</label>
     <input type="text" class="col-sm-3 input_form" id="exampleFormControlFile1" name="code" >
+        <label for="colFormLabel" class="col-sm-3 text_form" style="color: darkred">*</label>
 </div>
 
 <div class="form-group row">
 <label for="colFormLabel" class="col-sm-3 text_form">Name</label>
     <input type="text" class="col-sm-3 input_form" id="exampleFormControlFile1" name="equipment_name" >
+    <label for="colFormLabel" class="col-sm-3 text_form" style="color: darkred">*</label>
 </div>
 
 <div class="form-group row">
@@ -127,9 +128,15 @@
     <input type="text" class="col-sm-3 input_form" id="exampleFormControlFile1" name="modification_date" >
 </div>
 
+<div class="form-group row">
+<label for="colFormLabel" class="col-sm-3 text_form">Report Version</label>
+    <input type="text" class="col-sm-3 input_form" id="exampleFormControlFile1" name="report_version" value="1" >
+</div>
+
 <div class="form-group row" >
     <label for="colFormLabel" class="col-sm-3 text_form">Picture</label>
     <input type="file" class="col-sm-3" id="exampleFormControlFile1" name="picture" >
+    <label for="colFormLabel" class="col-sm-3 text_form" style="color: darkred">*</label>
 </div>
 <hr style="border-width: 2px"/>
 <p class="text_form">General Specs</p>

@@ -1,0 +1,139 @@
+<html lang="en">
+
+<style>
+    table, td {
+        border: 1px solid #23272b;
+        padding: 5px;
+        font-family: "Times New Roman", serif;
+        font-weight: bold;
+        font-style: italic;
+        color:black;
+        font-size: 16px;
+
+    }
+    th {
+        width: 35%;
+        font-size: 20px;
+    }
+    th1 {
+        text-align: center;
+        font-family: "Times New Roman", serif;
+        font-weight: bold;
+        font-style: italic;
+        color:black;
+        font-size: 24px;
+    }
+
+    th2 {
+        text-align: center;
+        padding: 5px;
+        font-family: "Times New Roman", serif;
+        font-weight: bold;
+        font-style: italic;
+        text-shadow: #363636;
+        color: black;
+        font-size: 26px;
+    }
+
+    @page {
+        size: a4 portrait;
+        margin:50px;
+
+        @frame header_frame {           /* Static Frame */
+            -pdf-frame-content: header_content;
+        }
+
+        @frame footer_frame {           /* Another static Frame */
+            -pdf-frame-content: footer_content;
+        left: 260pt; width: 512pt; top: 810pt; height: 20pt;        }
+    }
+
+</style>
+
+
+<body>
+
+<div id="footer_content"> page <pdf:pagenumber>
+
+</pdf:pagenumber>
+    of <pdf:pagecount>
+
+    </pdf:pagecount>
+    </div>
+
+    <!-- HTML Content -->
+
+    <table>
+            <th2>{{device.equipment_name}}</th2>
+    </table>
+
+
+    <br><br>
+    <table>
+
+        <tr>
+    			<th>Code</th>
+                <td>{{device.code}}</td>
+        </tr>
+
+        <tr>
+    			<th>Speciality</th>
+                <td>{{device.speciality}}</td>
+        </tr>
+        <tr>
+                <th>Technology Level</th>
+                <td>{{device.technology_level}}</td>
+        </tr>
+        <tr>
+    			<th>Facility LevelOF Care</th>
+                <td>{{device.facility_level}}</td>
+        </tr>
+        <tr>
+            <th>Purpose</th>
+            <td>{{device.purpose}}</td>
+
+        </tr>
+
+    </table>
+    <br>
+    <table>
+        <th1>
+            General Specs
+        </th1>
+
+    </table>
+
+    <table>
+    {% for item in device.general_specs.all %}
+        <tr>
+
+    		<th>{{ item.name }}</th>
+            <td>{{item.value}}</td>
+
+    	</tr>
+    {% endfor %}
+    </table>
+
+    <br>
+    <table>
+        <th1>
+            Technical Specs
+        </th1>
+
+    </table>
+
+    <table>
+    {% for item in device.technical_specs.all %}
+        <tr>
+
+    		<th>{{ item.name }}</th>
+            <td>{{item.value}}</td>
+
+    	</tr>
+    {% endfor %}
+    </table>
+
+<img src="{{ device.picture.url }}" alt="Image" style="border-radius: 20px">
+
+</body>
+</html>

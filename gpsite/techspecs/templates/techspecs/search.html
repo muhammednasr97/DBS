@@ -32,7 +32,9 @@
             </nav>
       </div>
     <div class="icons">
-            <a href="#" class="icons-btn d-inline-block js-search-open"><span class="icon-search"></span></a>
+            <lable>
+                
+            </lable>
           </div>
         </div>
       </div>
@@ -61,7 +63,7 @@
 <!-- forrrrrrrrrr user if enter 'all' in the search -->
 {% for result in all %}
     <br/>
-<a href="/techspecs/search/{{ result.report_id }}" target="_top" class="text"><u >{{result.equipment_name}}</u></a>
+<a href="/techspecs/search/{{ result.id }}" target="_top" class="text"><u >{{result.equipment_name}}</u></a>
     <br/>
 {% endfor %}
 
@@ -73,7 +75,7 @@
         <h4 class="text-black" style="font-style: italic">Results for <b>"{{ request.GET.q }}"</b> </h4>
         <br/>
         {% for result in results %}
-        <a href="/techspecs/search/{{ result.report_id }}" target="_blank" class="text"><u >{{result.equipment_name}}</u></a>
+        <a href="/techspecs/search/{{ result.id }}" target="_blank" class="text"><u >{{result.equipment_name}}</u></a>
         {% endfor %}
 
     {% else %}

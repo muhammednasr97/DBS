@@ -1,7 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="1b99b76d-3b29-4df7-b6b3-dd2888763ede" name="Default Changelist" comment="" />
+    <list default="true" id="1b99b76d-3b29-4df7-b6b3-dd2888763ede" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/techspecs/templates/techspecs/compare.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/techspecs/templates/techspecs/pdf_template.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/techspecs/utils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gpsite/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/gpsite/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/techspecs/mystyle.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/techspecs/mystyle.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/techspecs/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/techspecs/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/techspecs/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/techspecs/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/techspecs/migrations/0001_initial.py" beforeDir="false" afterPath="$PROJECT_DIR$/techspecs/migrations/0001_initial.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/techspecs/migrations/0002_auto_20200602_0718.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/techspecs/migrations/0003_auto_20200602_2104.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/techspecs/migrations/0004_auto_20200602_2134.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/techspecs/migrations/0005_delete_post.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/techspecs/migrations/0006_auto_20200604_0414.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/techspecs/migrations/0007_auto_20200605_1530.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/techspecs/migrations/0008_auto_20200609_0443.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/techspecs/migrations/0009_auto_20200609_0604.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/techspecs/migrations/0010_auto_20200609_0606.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/techspecs/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/techspecs/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/techspecs/templates/add_equipment.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/techspecs/templates/search.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/techspecs/templates/techspecs/JS.html" beforeDir="false" afterPath="$PROJECT_DIR$/techspecs/templates/techspecs/JS.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/techspecs/templates/techspecs/about.html" beforeDir="false" afterPath="$PROJECT_DIR$/techspecs/templates/techspecs/about.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/techspecs/templates/techspecs/add_equipment.html" beforeDir="false" afterPath="$PROJECT_DIR$/techspecs/templates/techspecs/add_equipment.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/techspecs/templates/techspecs/add_general_specs.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/techspecs/templates/techspecs/add_report.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/techspecs/templates/techspecs/add_tech_specs.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/techspecs/templates/techspecs/all_equipments.html" beforeDir="false" afterPath="$PROJECT_DIR$/techspecs/templates/techspecs/all_equipments.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/techspecs/templates/techspecs/delete.html" beforeDir="false" afterPath="$PROJECT_DIR$/techspecs/templates/techspecs/delete.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/techspecs/templates/techspecs/detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/techspecs/templates/techspecs/detail.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/techspecs/templates/techspecs/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/techspecs/templates/techspecs/home.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/techspecs/templates/techspecs/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/techspecs/templates/techspecs/search.html" beforeDir="false" afterPath="$PROJECT_DIR$/techspecs/templates/techspecs/search.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/techspecs/templates/techspecs/update.html" beforeDir="false" afterPath="$PROJECT_DIR$/techspecs/templates/techspecs/update.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/techspecs/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/techspecs/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/techspecs/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/techspecs/views.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -27,13 +66,17 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Python Script" />
         <option value="CSS File" />
+        <option value="Python Script" />
         <option value="HTML File" />
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
   <component name="ProjectId" id="1cdN2Ovi5bAH88tl9IvvOZXxrbP" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="true" />
@@ -42,8 +85,9 @@
   <component name="PropertiesComponent">
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="F:/Django-CRUD-Operations" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
@@ -124,6 +168,14 @@
       <workItem from="1591419497894" duration="65472000" />
       <workItem from="1591633054991" duration="43218000" />
       <workItem from="1591753378134" duration="14013000" />
+      <workItem from="1591769608429" duration="2797000" />
+      <workItem from="1591843110458" duration="34984000" />
+      <workItem from="1591960102460" duration="23674000" />
+      <workItem from="1592075706087" duration="3122000" />
+      <workItem from="1592146318849" duration="986000" />
+      <workItem from="1596724521530" duration="33983000" />
+      <workItem from="1596886156408" duration="2557000" />
+      <workItem from="1596893651209" duration="4258000" />
     </task>
     <servers />
   </component>
@@ -159,14 +211,14 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state width="1323" height="179" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1590970115240" />
-    <state x="379" y="188" key="com.intellij.ide.util.TipDialog" timestamp="1591753606038">
+    <state x="379" y="188" key="com.intellij.ide.util.TipDialog" timestamp="1596893861209">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="379" y="188" key="com.intellij.ide.util.TipDialog/0.0.1366.728@0.0.1366.728" timestamp="1591753606038" />
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1591569246664">
+    <state x="379" y="188" key="com.intellij.ide.util.TipDialog/0.0.1366.728@0.0.1366.728" timestamp="1596893861209" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1596789839344">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1591569246664" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1596789839344" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/gpsite$Test__techspecs.coverage" NAME="Test: techspecs Coverage Results" MODIFIED="1590937317227" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />

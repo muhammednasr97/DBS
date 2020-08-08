@@ -4,7 +4,7 @@
 {% block content %}
 
 
-    <div class="site-navbar py-2" style="background: floralwhite">
+    <div class="site-navbar py-2" style="background: white">
 
       <div class="search-wrap">
         <div class="container">
@@ -23,7 +23,7 @@
             </div>
           </div>
           <div class="main-nav d-none d-lg-block">
-            <nav class="site-navigation text-right text-md-center" role="navigation">
+            <nav class="site-navigation text-center text-md-center" role="navigation">
               <ul class="site-menu js-clone-nav d-none d-lg-block">
                 <li class="active"><a href="{% url 'home' %}">Home</a></li>
                 <li><a href="{% url 'search' %}">Search</a></li>
@@ -33,7 +33,7 @@
             </nav>
           </div>
           <div class="icons">
-            <a href="#" class="icons-btn d-inline-block js-search-open"><span class="icon-search"></span></a>
+            <a href="#" class="icons-btn d-inline-block js-search-open" style="color: white"><span class="icon-search"></span></a>
           </div>
         </div>
       </div>
@@ -49,7 +49,7 @@
               <h2 class="sub-title" >Effective Way to organize your Equipment Specifications</h2>
               <h1>DBS for Medical Equipment Specs</h1>
               <p>
-                <a href="{% url 'all_equipments' %}" class="btn btn-primary px-5 py-3">Show Equipment</a>
+                <label href="{% url 'all_equipments' %}" class="col-sm-3 " style="height: 150px"></label>
               </p>
             </div>
           </div>

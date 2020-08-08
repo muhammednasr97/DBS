@@ -1,10 +1,10 @@
 from django import forms
-from .models import Equipment, Technical_Report, Technical_Specs, General_Specs
+from .models import Technical_Report, Technical_Specs, General_Specs
 
 
 class AddEquipment(forms.ModelForm):
     class Meta:
-        model = Equipment
+        model = Technical_Report
         fields = ('code', 'equipment_name', 'purpose', 'speciality', 'picture', 'general_specs', 'technical_specs')
         """
         labels = {
