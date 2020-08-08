@@ -2,44 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1b99b76d-3b29-4df7-b6b3-dd2888763ede" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/techspecs/templates/techspecs/compare.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/techspecs/templates/techspecs/pdf_template.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/techspecs/utils.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gpsite/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/gpsite/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/techspecs/mystyle.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/techspecs/mystyle.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/techspecs/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/techspecs/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/techspecs/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/techspecs/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/techspecs/migrations/0001_initial.py" beforeDir="false" afterPath="$PROJECT_DIR$/techspecs/migrations/0001_initial.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/techspecs/migrations/0002_auto_20200602_0718.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/techspecs/migrations/0003_auto_20200602_2104.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/techspecs/migrations/0004_auto_20200602_2134.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/techspecs/migrations/0005_delete_post.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/techspecs/migrations/0006_auto_20200604_0414.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/techspecs/migrations/0007_auto_20200605_1530.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/techspecs/migrations/0008_auto_20200609_0443.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/techspecs/migrations/0009_auto_20200609_0604.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/techspecs/migrations/0010_auto_20200609_0606.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/techspecs/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/techspecs/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/techspecs/templates/add_equipment.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/techspecs/templates/search.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/techspecs/templates/techspecs/JS.html" beforeDir="false" afterPath="$PROJECT_DIR$/techspecs/templates/techspecs/JS.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/techspecs/templates/techspecs/about.html" beforeDir="false" afterPath="$PROJECT_DIR$/techspecs/templates/techspecs/about.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/techspecs/templates/techspecs/add_equipment.html" beforeDir="false" afterPath="$PROJECT_DIR$/techspecs/templates/techspecs/add_equipment.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/techspecs/templates/techspecs/add_general_specs.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/techspecs/templates/techspecs/add_report.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/techspecs/templates/techspecs/add_tech_specs.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/techspecs/templates/techspecs/all_equipments.html" beforeDir="false" afterPath="$PROJECT_DIR$/techspecs/templates/techspecs/all_equipments.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/techspecs/templates/techspecs/delete.html" beforeDir="false" afterPath="$PROJECT_DIR$/techspecs/templates/techspecs/delete.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/techspecs/templates/techspecs/detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/techspecs/templates/techspecs/detail.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/techspecs/templates/techspecs/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/techspecs/templates/techspecs/home.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/techspecs/templates/techspecs/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/techspecs/templates/techspecs/search.html" beforeDir="false" afterPath="$PROJECT_DIR$/techspecs/templates/techspecs/search.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/techspecs/templates/techspecs/update.html" beforeDir="false" afterPath="$PROJECT_DIR$/techspecs/templates/techspecs/update.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/techspecs/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/techspecs/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/techspecs/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/techspecs/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -175,7 +138,7 @@
       <workItem from="1592146318849" duration="986000" />
       <workItem from="1596724521530" duration="33983000" />
       <workItem from="1596886156408" duration="2557000" />
-      <workItem from="1596893651209" duration="4258000" />
+      <workItem from="1596893651209" duration="4647000" />
     </task>
     <servers />
   </component>
