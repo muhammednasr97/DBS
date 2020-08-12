@@ -16,8 +16,16 @@ border-radius: 8px;
   font-style: italic;
   text-shadow: #363636;
   color: #23272b;
-  font-size: 22px;
+  font-size: 24px;
 
+}
+
+.text1{
+  font-family: "Times New Roman", serif;
+  font-style: italic;
+  text-shadow: #363636;
+  color: #23272b;
+  font-size: 28px;
 }
 
 .text_form{
@@ -55,6 +63,45 @@ border-radius: 8px;
 
 }
 
+.filterbtn1 {
+    text-transform: none;
+    background-color: lightskyblue;
+    outline: none;
+    color: black;
+    cursor: pointer;
+    fill: lightskyblue;
+    border-radius: 20px;
+}
+
+.filterbtn2 {
+    text-transform: none;
+    background-color: gray;
+    outline: none;
+    color: black;
+    cursor: pointer;
+    fill: lightskyblue;
+    border-radius: 20px;
+}
+
+.filterbtn3 {
+    text-transform: none;
+    background-color: lightskyblue;
+    outline: none;
+    color: black;
+    cursor: pointer;
+    fill: lightskyblue;
+    border-radius: 20px;
+}
+
+.filterbtn4 {
+    text-transform: none;
+    background-color: gray;
+    outline: none;
+    color: black;
+    cursor: pointer;
+    fill: lightskyblue;
+    border-radius: 20px;
+}
 .card {
   top: 420px;
   left: 750px;
@@ -112,3 +159,13 @@ img {border-radius: 5px 5px 0 0;}
     color: black;
     font-size: 26px;
 }
+
+/* Styles for wrapping the search box */
+
+.main {
+    width: 50%;
+    margin: 50px auto;
+}
+
+/* Bootstrap 4 text input with search icon */
+

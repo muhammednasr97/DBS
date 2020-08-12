@@ -31,7 +31,9 @@
               </div>
 
             <div class="icons">
-            <a href="#" class="icons-btn d-inline-block js-search-open"><span class="icon-search"></span></a>
+            <lable>
+
+            </lable>
           </div>
         </div>
       </div>
@@ -55,67 +57,83 @@
 <div class="site-section">
 <div class="container">
 <h2 class="text-black">
-    <b>Medical Equipment</b>
+    <b>{{ device.equipment_name }}</b>
 </h2>
 <br/>
 <br/>
 
 
-<form class="text-black" style="border: 2px solid lightgray; padding: 50px ;background: lightgray">
+<form class="text-black" style="border: 2px solid lightgray;border-radius: 15px; padding: 50px ;background: lightgray">
 
 
 <!-- here are the image and form for display the equipment details -->
 <div class="card" >
   <img src="{{ device.picture.url }}" class="card-img" alt="Image" style="border-radius: 20px">
+    {% if device.purpose %}
   <div class="card-body container" style="background: gray;border-radius: 15px;" >
-    <p class=" text_form"  style="color: #0b0b0b; font-size: 18px">{{ device.purpose }}</p>
+    <b style="color: black; font-size: 18px; font-weight: bold">Purpose:</b><p class=" text_form">{{ device.purpose }}</p>
   </div>
+    {% endif %}
 </div>
 
+{% if device.code %}
 <div class="form-group row ">
 <label for="colFormLabel" class="col-sm-3 text_form">Code</label>
 <textarea class="form-control col-sm-3 text-black input_form" id="colFormLabel" rows="1" readonly wrap="hard">{{ device.code }}</textarea>
 </div>
+{% endif %}
 
+{% if device.equipment_name %}
 <div class="form-group row">
 <label for="colFormLabel" class="col-sm-3 text_form">Name</label>
 <textarea class="form-control col-sm-3 text-black input_form" id="colFormLabel" rows="1" readonly wrap="hard" >{{ device.equipment_name }}</textarea>
 </div>
+{% endif %}
 
+{% if device.speciality %}
 <div class="form-group row">
 <label for="colFormLabel" class="col-sm-3 text_form">Speciality</label>
 <textarea class="form-control col-sm-3 text-black input_form" id="colFormLabel" rows="1" readonly wrap="hard">{{ device.speciality }}</textarea>
 </div>
+{% endif %}
 
-
+{% if device.technology_level %}
 <div class="form-group row">
 <label for="colFormLabel" class="col-sm-3 text_form">Technology Level</label>
 <textarea class="form-control col-sm-3 text-black input_form" id="colFormLabel" rows="1" readonly wrap="hard">{{ device.technology_level }}</textarea>
 </div>
+{% endif %}
 
-
+{% if device.facility_level %}
 <div class="form-group row">
 <label for="colFormLabel" class="col-sm-3 text_form">Facility Level Of Care</label>
 <textarea class="form-control col-sm-3 text-black input_form" id="colFormLabel" rows="1" readonly wrap="hard">{{ device.facility_level }}</textarea>
 </div>
+{% endif %}
 
+{% if device.addition_date %}
 <div class="form-group row">
 <label for="colFormLabel" class="col-sm-3 text_form">Addition date</label>
 <textarea class="form-control col-sm-3 text-black input_form" id="colFormLabel" rows="1" readonly wrap="hard">{{ device.addition_date }}</textarea>
 </div>
+{% endif %}
 
+{% if device.modification_date %}
 <div class="form-group row">
 <label for="colFormLabel" class="col-sm-3 text_form">Modification date</label>
 <textarea class="form-control col-sm-3 text-black input_form" id="colFormLabel" rows="1" readonly wrap="hard">{{ device.modification_date }}</textarea>
 </div>
+{% endif %}
 
 <div class="form-group row ">
 <label for="colFormLabel" class="col-sm-3 text_form">Report Version</label>
 <textarea class="form-control col-sm-3 text-black input_form" id="colFormLabel" rows="1" readonly wrap="hard">{{ device.version }}</textarea>
 </div>
 
+{% if device.general_specs.all  %}
 <h2  style="font-weight: bold; font-size: 30px">General Specs</h2>
 <hr style="border: 1px solid gray; width: 13cm; margin: 0px "/><br/>
+{% endif %}
 {% for item in device.general_specs.all %}
     <div class="form-group row">
     <label for="colFormLabel" class="col-sm-3 text_form">{{item.name}}</label>
@@ -124,9 +142,10 @@
 {% endfor %}
     <br/>
 
-
+{% if device.technical_specs.all  %}
 <h2  style="font-weight: bold; font-size: 30px">Technical specs</h2>
 <hr style="border: 1px solid gray; width: 13cm; margin: 0px "/><br/>
+{% endif %}
 {% for item in device.technical_specs.all %}
 
     <div class="form-group row">
@@ -137,8 +156,21 @@
 </form>
 <br><br>
 
-<button type="submit" class="button btn col-sm-3 " style="font-weight: bold ; background: black; border: black; color: white"
+
+<div class=" row " >
+    <button type="submit" class="button btn col-sm-3 " style="font-weight: bold ; background: black; border: black; color: white"
         onclick="document.location.href = 'http://127.0.0.1:8000/techspecs/pdf/{{ device.id}}'">Print</button>
+    <label class="col-sm-4"></label>
+    <div>
+              <button type="button" class="button btn " style="background: black; border: black; color: white"
+                      onclick="document.location.href = 'http://127.0.0.1:8000/techspecs/update/{{ device.id }}'">Update</button>
+              <button type="button" class="button btn" style="background: black; border: black; color: white"
+                      onclick="document.location.href = 'http://127.0.0.1:8000/techspecs/delete/{{ device.id }}'">Delete</button>
+              <button type="button" class="button btn" style="background: black; border: black; color: white"
+                      onclick="document.location.href = 'http://127.0.0.1:8000/techspecs/compare/{{ device.id}}'">Compare last 2 versions</button>
+
+    </div>
+  </div>
 
 </div>
 </div>

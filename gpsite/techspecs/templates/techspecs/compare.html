@@ -59,14 +59,14 @@
 <div class="site-section">
 <div class="container">
 <h2 class="text-black">
-    <b>Medical Equipment</b>
+    <b>{{ device.equipment_name }} Comparsion</b>
 
 </h2>
 <br/>
 <br/>
 
 <div class="row">
-  <div class="column" style="background-color:lightblue">
+  <div class="column" style="background-color:lightblue; border: 2px solid lightblue;border-radius: 15px">
     <form class="text-black" style="padding-left: 50px ">
 <!-- here are the image and form for display the equipment details -->
 
@@ -117,8 +117,11 @@
 <textarea class="form-control col-sm-6 text-black input_form" id="colFormLabel" rows="1" readonly wrap="hard">{{ device.modification_date }}</textarea>
 </div>
 
+{% if device.general_specs.all  %}
 <h2  style="font-weight: bold; font-size: 30px">General Specs</h2>
 <hr style="border: 1px solid gray; width: 13cm; margin: 0px "/><br/>
+{% endif %}
+
 {% for item in device.general_specs.all %}
     <div class="form-group row">
     <label for="colFormLabel" class="col-sm-5 text_form">{{item.name}}</label>
@@ -127,9 +130,10 @@
 {% endfor %}
     <br/>
 
-
+{% if device.technical_specs.all  %}
 <h2  style="font-weight: bold; font-size: 30px">Technical specs</h2>
 <hr style="border: 1px solid gray; width: 13cm; margin: 0px "/><br/>
+{% endif %}
 {% for item in device.technical_specs.all %}
 
     <div class="form-group row">
@@ -150,7 +154,7 @@
 </form>
   </div>
 
-  <div class="column" style="background-color:lightgray">
+  <div class="column" style="background-color:lightgray; border: 2px solid lightgray;border-radius: 15px;">
     <form class="text-black" style="padding-left: 50px ">
 <!-- here are the image and form for display the equipment details -->
 
@@ -208,8 +212,10 @@
 <textarea class="form-control col-sm-6 text-black input_form" id="colFormLabel" rows="1" readonly wrap="hard">{{ new_device.modification_date }}</textarea>
 </div>
 
+{% if new_device.general_specs.all  %}
 <h2  style="font-weight: bold; font-size: 30px">General Specs</h2>
 <hr style="border: 1px solid gray; width: 13cm; margin: 0px "/><br/>
+{% endif %}
 {% for item in new_device.general_specs.all %}
     <div class="form-group row">
     <label for="colFormLabel" class="col-sm-5 text_form">{{item.name}}</label>
@@ -218,9 +224,11 @@
 {% endfor %}
     <br/>
 
-
+{% if new_device.technical_specs.all  %}
 <h2  style="font-weight: bold; font-size: 30px">Technical specs</h2>
 <hr style="border: 1px solid gray; width: 13cm; margin: 0px "/><br/>
+{% endif %}
+
 {% for item in new_device.technical_specs.all %}
 
     <div class="form-group row">

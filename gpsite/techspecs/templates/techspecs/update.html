@@ -1,8 +1,31 @@
-{% extends 'base.html' %}
-{% block content %}
 {% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Database System</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link href="https://fonts.googleapis.com/css?family=Rubik:400,700|Crimson+Text:400,400i" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'techspecs/fonts/icomoon/style.css'%}">
+  <link rel="stylesheet" href="{% static  'techspecs/css/bootstrap.min.css' %}">
+  <link rel="stylesheet" href="{% static 'techspecs/css/magnific-popup.css'%}">
+  <link rel="stylesheet" href="{% static 'techspecs/css/jquery-ui.css' %}">
+  <link rel="stylesheet" href="{% static 'techspecs/css/owl.carousel.min.css' %}">
+  <link rel="stylesheet" href="{% static 'techspecs/css/owl.theme.default.min.css' %}">
+  <link rel="stylesheet" href="{% static 'techspecs/css/aos.css' %}">
+  <link rel="stylesheet" href="{% static 'techspecs/css/style.css' %}">
+  <link rel="stylesheet" href="{% static 'techspecs/mystyle.css' %}">
+    <!-- jQuery -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 
+  <!-- Fengyuan Chen's Datepicker -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.min.css" integrity="sha256-b88RdwbRJEzRx95nCuuva+hO5ExvXXnpX+78h8DjyOE=" crossorigin="anonymous" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.min.js" integrity="sha256-/7FLTdzP6CfC1VBAj/rsp3Rinuuu9leMRGd354hvk0k=" crossorigin="anonymous"></script>
+</head>
 
+<body>
+
+<div class="site-wrap">
 <div class="site-navbar py-2" style="background: lightgray">
 
       <div class="search-wrap">
@@ -56,17 +79,12 @@
 <div class="site-section text-black "  >
   <div class="container">
 
-          <h2 class="h3 mb-5 text-black"><b>Update Equipment</b></h2>
+          <h2 class="h3 mb-5 text-black"><b>{{ device.equipment_name }}</b></h2>
 
 <form  method="POST" id="form-id" action="{% url 'edit' device.id device.version%}"
        style="border: 2px solid lightgray; padding: 50px ;background: lightgray" enctype="multipart/form-data"  >
     {% csrf_token %}
-<!--
-<div class="form-group row">
-<label for="colFormLabel" class="col-sm-3 text_form">Report ID</label>
-    <input type="text" class="col-sm-3 input_form" id="exampleFormControlFile1" name="id" value="{{device.id}}" readonly>
-</div>
--->
+
 <div class="form-group row">
 <label for="colFormLabel" class="col-sm-3 text_form">Code</label>
     <input type="text" class="col-sm-3 input_form" id="exampleFormControlFile1" name="code" value="{{device.code}}" >
@@ -109,22 +127,44 @@
 
 <div class="form-group row">
 <label for="colFormLabel" class="col-sm-3 text_form">Technology Level</label>
-    <input type="text" class="col-sm-3 input_form" id="exampleFormControlFile1" name="technology_level" value="{{device.technology_level}}" >
+    <select class="form-control col-sm-3 select" id="inlineFormCustomSelectPref" name="technology_level" >
+    {% if device.technology_level == 'Follower' %}
+    <option selected>{{device.technology_level}}</option>
+    <option value="Leader">Leader</option>
+    {% else %}
+    <option selected>{{device.technology_level}}</option>
+    <option value="Follower">Follower</option>
+    {% endif %}
+    </select>
 </div>
 
 <div class="form-group row">
 <label for="colFormLabel" class="col-sm-3 text_form">Facility Level</label>
-    <input type="text" class="col-sm-3 input_form" id="exampleFormControlFile1" name="facility_level" value="{{device.facility_level}}">
+    <select class="form-control col-sm-3 select" id="inlineFormCustomSelectPref" name="facility_level" >
+    {% if device.facility_level == 'Primary' %}
+        <option selected>{{ device.facility_level }}</option>
+        <option value="Secondary">Secondary</option>
+        <option value="Tertiary">Tertiary</option>
+    {% elif device.facility_level == 'Secondary' %}
+        <option selected>{{ device.facility_level }}</option>
+        <option value="Primary" >Primary</option>
+        <option value="Tertiary">Tertiary</option>
+    {% else %}
+        <option selected>{{ device.facility_level }}</option>
+        <option value="Primary" >Primary</option>
+        <option value="Secondary">Secondary</option>
+    {% endif %}
+    </select>
 </div>
 
 <div class="form-group row">
 <label for="colFormLabel" class="col-sm-3 text_form">Addition Date</label>
-    <input type="text" class="col-sm-3 input_form" id="exampleFormControlFile1" name="addition_date" value="{{device.addition_date}}">
+    <input  class="col-sm-3 input_form" id="datepicker1" name="addition_date" value="{{device.addition_date}}">
 </div>
 
 <div class="form-group row ">
 <label for="colFormLabel" class="col-sm-3 text_form">Modification Date</label>
-    <input type="text" class="col-sm-3 input_form" id="exampleFormControlFile1" name="modification_date" value="{{ device.modification_date }}">
+    <input class="col-sm-3 input_form" id="datepicker2" name="modification_date" value="{{ device.modification_date }}">
 </div>
 
 <div class="form-group row" >
@@ -135,45 +175,112 @@
 </div>
 <hr style="border-width: 2px"/>
 <p class="text_form">General Specs</p>
-<div class="input_fields_wrap_general ">
+<div class="input_fields_wrap_general input_fields_wrap_Fgeneral">
 {% for item in device.general_specs.all %}
     <div class="form-group row col-md-12">
-            <input class="col-sm-3 input_form" id="exampleFormControlFile1" name="gene_name" value="{{item.name}}" placeholder="Name">
-            <input class="col-sm-3 input_form" id="exampleFormControlFile2" name="gene_value" value="{{item.value}}" placeholder="Value">
+            {% if item.name %}
+            <input class="col-sm-3 input_form" id="exampleFormControlFile3" name="gene_name" value="{{item.name}}" placeholder="Name">
+            {% else %}
+            <label class="col-sm-3"></label>
+            {% endif %}
+
+            {% if item.value %}
+            <input class="col-sm-3 input_form" id="exampleFormControlFile3" name="gene_value" value="{{item.value}}" placeholder="Name">
+            {% else %}
+            <label class="col-sm-3"></label>
+            {% endif %}
+            {% if item.name %}
             <label href="#" class="remove_field_general col-sm-3 align-middle"
                    style="color: black; text-decoration: underline; display: block; line-height: 50px">Remove</label>
+            {% endif %}
     </div>
 {% endfor %}
 </div>
-<a href="#" class="add_field_button_general  " style="color: black"><u>Add More Specs</u></a>
+<a href="#" class="add_field_button_general  " style="color: black"><u>Add Feature</u></a>
+<a href="#" class="add_field_button_Fgeneral " style="color: black"><u>Add Spec</u></a>
 
 <hr style="border-width: 2px"/>
 <p class="text_form">Technical Specs</p>
-<div class="input_fields_wrap_technical">
+<div class="input_fields_wrap_technical input_fields_wrap_Ftechnical">
 {% for item in device.technical_specs.all %}
     <div class="form-group row col-md-12">
+            {% if item.name %}
             <input class="col-sm-3 input_form" id="exampleFormControlFile3" name="tech_name" value="{{item.name}}" placeholder="Name">
-            <input  class="col-sm-3 input_form" id="exampleFormControlFile4" name="tech_value" value="{{item.value}}" placeholder="Value">
+            {% else %}
+            <label class="col-sm-3"></label>
+            {% endif %}
+            {% if item.value %}
+            <input class="col-sm-3 input_form" id="exampleFormControlFile3" name="tech_name" value="{{item.value}}" placeholder="Name">
+            {% else %}
+            <label class="col-sm-3"></label>
+            {% endif %}
+            {% if item.name %}
             <label href="#" class="remove_field_technical col-sm-3 align-middle"
                    style="color: black; text-decoration: underline; display: block; line-height: 50px">Remove</label>
+            {%endif %}
     </div>
 {% endfor %}
 </div>
-<a href="#" class="add_field_button_technical " style="color: black"><u>Add More Specs</u></a>
+<a href="#" class="add_field_button_technical " style="color: black"><u>Add Feature</u></a>
+<a href="#" class="add_field_button_Ftechnical " style="color: black"><u>Add Spec</u></a>
 <br/><br/>
 
 <div class="form-group row ">
 <button  type="submit" class="btn btn-black btn-lg col-sm-2"><i class="fas fa-database"></i>Update</button>
 </div>
-
 </form>
-          
-        </div>
+  </div>
       </div>
 
+<footer class="site-footer ">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6 col-lg-3 mb-4 mb-lg-0">
 
-<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+            <div class="block-7">
+                <h3 class="footer-heading mb-4"><b>About Us</b></h3>
+              <p class="list-unstyled">Graduation Project<br/> Senior Students at Faculty of Engineering Cairo University<br/>Biomedical Engineering Department</p>
+            </div>
+
+          </div>
+          <div class="col-lg-3 mx-auto mb-5 mb-lg-0">
+              <h3 class="footer-heading mb-4"><b>Quick Links</b></h3>
+            <ul class="list-unstyled">
+              <li><a href="{% url 'home' %}">Home</a></li>
+              <li><a href="{% url 'search' %}">Search</a></li>
+              <li><a href="{% url 'all_equipments' %}">Database</a></li>
+              <li><a href="{% url 'about' %}">About</a></li>
+            </ul>
+          </div>
+
+          <div class="col-md-6 col-lg-3">
+            <div class="block-5 mb-5">
+                <h3 class="footer-heading mb-4"><b>Contact Info</b></h3>
+              <ul class="list-unstyled">
+                <li class="address">Faculty of Engineering Cairo University</li>
+                <li class="email">feedback@yahoo.com</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+</div>
+  <script src="{% static 'techspecs/js/jquery-ui.js' %}"></script>
+  <script src="{% static 'techspecs/js/popper.min.js' %}"></script>
+  <script src="{% static 'techspecs/js/bootstrap.min.js' %}"></script>
+  <script src="{% static 'techspecs/js/owl.carousel.min.js' %}"></script>
+  <script src="{% static 'techspecs/js/jquery.magnific-popup.min.js' %}"></script>
+  <script src="{% static 'techspecs/js/aos.js' %}"></script>
+  <script src="{% static 'techspecs/js/main.js' %}"></script>
+
+</body>
+
+
 <script>
+$(function () {
+        $("#datepicker1").datepicker();
+        $("#datepicker2").datepicker(); });
 // function for general specs
 <!-- function for general specs -->
 	$(document).ready(function() {
@@ -194,6 +301,31 @@
 	  }
     });
     $(wrapper).on("click",".remove_field_general", function(e){ //user click on remove text
+		e.preventDefault();
+		$(this).parent('div').remove();
+		x--;
+    })
+});
+
+$(document).ready(function() {
+    var max_fields      = 100; //maximum input boxes allowed
+    var wrapper         = $(".input_fields_wrap_Fgeneral"); //Fields wrapper
+    var add_button      = $(".add_field_button_Fgeneral"); //Add button ID
+    var x = 1; //initlal text box count
+   $(add_button).click(function(e){ //on add input button click
+        e.preventDefault();
+        if(x < max_fields){ //max input box allowed
+		     //text box increment
+            $(wrapper).append(
+                '<div class="form-group row col-md-12"><lable class="col-sm-3"></lable>'+
+                '<input type="hidden" class="col-sm-3" id="exampleFormControlFile1" name="gene_name" placeholder="Name" >' +
+                '<input type="text" class="col-sm-3 input_form" id="exampleFormControlFile1" name="gene_value" placeholder="Value">' +
+                '<label href="#" class="remove_field_Fgeneral col-sm-3 align-middle"\n' +
+                'style="color: black; text-decoration: underline; display: block; line-height: 40px">Remove</label></div>');
+            x++;
+	  }
+    });
+    $(wrapper).on("click",".remove_field_Fgeneral", function(e){ //user click on remove text
 		e.preventDefault();
 		$(this).parent('div').remove();
 		x--;
@@ -225,7 +357,32 @@ $(document).ready(function() {
     })
 });
 
+$(document).ready(function() {
+    var max_fields      = 100; //maximum input boxes allowed
+    var wrapper         = $(".input_fields_wrap_Ftechnical"); //Fields wrapper
+    var add_button      = $(".add_field_button_Ftechnical"); //Add button ID
+    var x = 1; //initlal text box count
+   $(add_button).click(function(e){ //on add input button click
+        e.preventDefault();
+        if(x < max_fields){ //max input box allowed
+		     //text box increment
+            $(wrapper).append(
+                '<div class="form-group row col-md-12"><lable class="col-sm-3"></lable>'+
+                '<input type="hidden" class="col-sm-3" id="exampleFormControlFile1" name="tech_name" placeholder="Name" >' +
+                '<input type="text" class="col-sm-3 input_form" id="exampleFormControlFile1" name="tech_value" placeholder="Value">' +
+                '<label href="#" class="remove_field_Ftechnical col-sm-3 align-middle"\n'+
+                'style="color: black; text-decoration: underline; display: block; line-height: 40px">Remove</label></div>');
+            x++;
+	  }
+    });
+    $(wrapper).on("click",".remove_field_Ftechnical", function(e){ //user click on remove text
+		e.preventDefault();
+		$(this).parent('div').remove();
+		x--;
+    })
+});
+
 </script>
+</html>
 
       
-{% endblock %}

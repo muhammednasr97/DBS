@@ -1,59 +1,23 @@
-<html>
-    <head>
-        <title>Add/Remove Input Fields Dynamically with jQuery</title>
-            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+<form  method="GET" >
+<input type="text"  class="input  col-sm-6" style="text-transform: lowercase;text-align: left" name="q" value="{{request.GET.q}}" placeholder="Search"/>
+<input type="submit" style="border-radius: 25px" class="btn btn-black" name="submit" value="Search"/>
+</form>
 
-    </head>
-	<script src="https://code.jquery.com/jquery-3.3.1.min.js"
-			  ></script>
-
-<p>
-    {% for item in device %}
-    {{item.code}}
 <br/>
-    {% endfor %}
-</p>
+<br/>
 
-	<script>
-	$(document).ready(function() {
-    var max_fields      = 100; //maximum input boxes allowed
-    var wrapper         = $(".input_fields_wrap"); //Fields wrapper
-    var add_button      = $(".add_field_button"); //Add button ID
+{% if submitbutton == 'Search' and request.GET.q != '' %}
+    {% if results %}
+        <br/>
+        <h4 class="text-black" style="font-style: italic">Results for <b>"{{ request.GET.q }}"</b> </h4>
+        <br/>
+        {% for result in results %}
+            <br>
+        <a href="/techspecs/search/{{ result.id }}" class="text"><u >{{result.equipment_name}}</u></a><br>
+        {% endfor %}
 
-    var x = 1; //initlal text box count
+    {% else %}
+<p class="text-black" style="font-style: italic; font-weight: bold">No search results for this text.</p>
+    {% endif %}
 
-
-   $(add_button).click(function(e){ //on add input button click
-        e.preventDefault();
-        if(x < max_fields){ //max input box allowed
-
-		     //text box increment
-            $(wrapper).append(
-                '<div class="form-group row"><label for="colFormLabel" class="col-sm-2"></label>' +
-                '<textarea class="form-control col-sm-2" id="colFormLabel1" rows="1" placeholder="Name"  wrap="hard" name="name" autocomplete="on"></textarea>' +
-                '<textarea class="form-control col-sm-2" id="colFormLabel2" rows="1" placeholder="Value" wrap="hard" name="value" autocomplete="on"></textarea>' +
-                '<a href="#" class="remove_field ">Remove</a></div>');
-            x++;
-	  }
-    });
-
-    $(wrapper).on("click",".remove_field", function(e){ //user click on remove text
-
-		e.preventDefault();
-		$(this).parent('div').remove();
-		x--;
-    })
-});
-
-	</script>
-	<body>
-    <div class="input_fields_wrap">
-        <div class="form-group row">
-            <label for="colFormLabel" class="col-sm-2">Technical Specs</label>
-            <textarea class="form-control col-sm-2" id="colFormLabel1" rows="1" placeholder="Name"  wrap="hard" name="name" autocomplete="on"></textarea>
-            <textarea class="form-control col-sm-2" id="colFormLabel2" rows="1" placeholder="Value"  wrap="hard" name="value" autocomplete="on"></textarea>
-            <a href="#" class="add_field_button "><u>Add More Specs</u></a></div>
-        </div>
-     </div>
-</body>
-</html>
+{% endif %}

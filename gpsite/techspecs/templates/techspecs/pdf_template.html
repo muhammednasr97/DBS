@@ -1,3 +1,4 @@
+{% load pdf_filters %}
 <html lang="en">
 
 <style>
@@ -9,7 +10,6 @@
         font-style: italic;
         color:black;
         font-size: 16px;
-
     }
     th {
         width: 35%;
@@ -23,7 +23,6 @@
         color:black;
         font-size: 24px;
     }
-
     th2 {
         text-align: center;
         padding: 5px;
@@ -34,18 +33,14 @@
         color: black;
         font-size: 26px;
     }
-
     @page {
         size: a4 portrait;
         margin:50px;
 
-        @frame header_frame {           /* Static Frame */
-            -pdf-frame-content: header_content;
-        }
-
         @frame footer_frame {           /* Another static Frame */
             -pdf-frame-content: footer_content;
-        left: 260pt; width: 512pt; top: 810pt; height: 20pt;        }
+        left: 260pt; width: 512pt; top: 810pt; height: 20pt;
+        }
     }
 
 </style>
@@ -63,44 +58,58 @@
 
     <!-- HTML Content -->
 
-    <table>
-            <th2>{{device.equipment_name}}</th2>
+    <table style="border: white">
+            <th style="width: 60%; text-align: left; font-size: 30px">{{ device.equipment_name }}</th>
+            <td style="border: white"><img src="{{ device.picture.path | get64 }}" alt="image" style="width:250px; height: 200px" /></td>
     </table>
-
 
     <br><br>
-    <table>
 
-        <tr>
+        <table>
+            {% if device.code %}
+                <tr>
     			<th>Code</th>
                 <td>{{device.code}}</td>
-        </tr>
+                </tr>
+            {% endif %}
+        </table>
 
-        <tr>
+        <table>
+            {% if device.speciality %}
+                <tr>
     			<th>Speciality</th>
                 <td>{{device.speciality}}</td>
-        </tr>
-        <tr>
+                </tr>
+            {% endif %}
+        </table>
+        <table>
+            {% if device.technology_level %}
                 <th>Technology Level</th>
                 <td>{{device.technology_level}}</td>
-        </tr>
-        <tr>
-    			<th>Facility LevelOF Care</th>
+            {% endif %}
+        </table>
+        <table>
+            {% if device.facility_level %}
+    			<th>Facility Level oF Care</th>
                 <td>{{device.facility_level}}</td>
-        </tr>
-        <tr>
+            {% endif %}
+        </table>
+
+        <table>
+            {% if device.purpose %}
             <th>Purpose</th>
             <td>{{device.purpose}}</td>
+            {% endif %}
+        </table>
 
-        </tr>
 
-    </table>
     <br>
+    {% if device.general_specs.all  %}
     <table>
         <th1>
             General Specs
         </th1>
-
+    {% endif %}
     </table>
 
     <table>
@@ -115,25 +124,29 @@
     </table>
 
     <br>
+    {% if device.technical_specs.all  %}
     <table>
         <th1>
             Technical Specs
         </th1>
-
+    {% endif %}
     </table>
 
     <table>
     {% for item in device.technical_specs.all %}
         <tr>
-
     		<th>{{ item.name }}</th>
             <td>{{item.value}}</td>
-
     	</tr>
     {% endfor %}
     </table>
-
-<img src="{{ device.picture.url }}" alt="Image" style="border-radius: 20px">
+    <br>
+<!--
+    <table style="border: white">
+            <th style="width: 60%">Picture</th>
+            <td style="border: white"><img src="{{ device.picture.path | get64 }}" alt="image" style="border-radius: 8px" /></td>
+    </table>
+-->
 
 </body>
 </html>

@@ -1,0 +1,166 @@
+{% extends 'base.html' %}
+{% block content %}
+
+    <div class="site-navbar py-2" style="background: lightgray">
+
+      <div class="search-wrap">
+        <div class="container">
+          <a href="#" class="search-close js-search-close"><span class="icon-close2"></span></a>
+          <form action="#" method="post">
+            <input type="text" class="form-control" placeholder="Search keyword and hit enter...">
+          </form>
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="d-flex align-items-center justify-content-between">
+          <div class="logo">
+            <div class="site-logo">
+              <a href="{% url 'home' %}" class="js-logo-clone">DBS</a>
+            </div>
+          </div>
+        <div class="main-nav d-none d-lg-block">
+                <nav class="site-navigation text-right text-md-center" role="navigation">
+                  <ul class="site-menu js-clone-nav d-none d-lg-block">
+                    <li><a href="{% url 'home' %}">Home</a></li>
+                    <li class="active"><a href="{% url 'search' %}">Search</a></li>
+                    <li><a href="{% url 'all_equipments' %}">Database</a></li>
+                    <li><a href="{% url 'about' %}">About</a></li>
+                  </ul>
+                </nav>
+              </div>
+
+            <div class="icons">
+            <lable>
+
+            </lable>
+          </div>
+        </div>
+      </div>
+</div>
+
+
+
+    <div class="bg-light py-3">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 mb-0">
+            <a href="{% url 'home' %}" style="color: #1d5987">Home</a> <span class="mx-2 mb-0">/</span>
+          <a href="{% url 'search' %}" style="color: #1d5987">Search</a> <span class="mx-2 mb-0">/</span>
+            <strong class="text-black">{{ device.equipment_name }}</strong>
+            </div>
+        </div>
+      </div>
+    </div>
+
+
+<div class="site-section">
+<div class="container">
+<h2 class="text-black">
+    <b>{{device.equipment_name}}</b>
+</h2>
+<br/>
+<br/>
+
+
+<form class="text-black" style="border: 2px solid lightgray; border-radius:15px; padding: 50px ;background: lightgray">
+
+
+<!-- here are the image and form for display the equipment details -->
+<div class="card" >
+  <img src="{{ device.picture.url }}" class="card-img" alt="Image" style="border-radius: 20px">
+    {% if device.purpose %}
+  <div class="card-body container" style="background: gray;border-radius: 15px;" >
+    <b style="color: black; font-size: 18px; font-weight: bold">Purpose:</b><p class=" text_form">{{ device.purpose }}</p>
+  </div>
+    {% endif %}
+</div>
+
+{% if device.code %}
+<div class="form-group row ">
+<label for="colFormLabel" class="col-sm-3 text_form">Code</label>
+<textarea class="form-control col-sm-3 text-black input_form" id="colFormLabel" rows="1" readonly wrap="hard">{{ device.code }}</textarea>
+</div>
+{% endif %}
+
+{% if device.equipment_name %}
+<div class="form-group row">
+<label for="colFormLabel" class="col-sm-3 text_form">Name</label>
+<textarea class="form-control col-sm-3 text-black input_form" id="colFormLabel" rows="1" readonly wrap="hard" >{{ device.equipment_name }}</textarea>
+</div>
+{% endif %}
+
+{% if device.speciality %}
+<div class="form-group row">
+<label for="colFormLabel" class="col-sm-3 text_form">Speciality</label>
+<textarea class="form-control col-sm-3 text-black input_form" id="colFormLabel" rows="1" readonly wrap="hard">{{ device.speciality }}</textarea>
+</div>
+{% endif %}
+
+{% if device.technology_level %}
+<div class="form-group row">
+<label for="colFormLabel" class="col-sm-3 text_form">Technology Level</label>
+<textarea class="form-control col-sm-3 text-black input_form" id="colFormLabel" rows="1" readonly wrap="hard">{{ device.technology_level }}</textarea>
+</div>
+{% endif %}
+
+{% if device.facility_level %}
+<div class="form-group row">
+<label for="colFormLabel" class="col-sm-3 text_form">Facility Level Of Care</label>
+<textarea class="form-control col-sm-3 text-black input_form" id="colFormLabel" rows="1" readonly wrap="hard">{{ device.facility_level }}</textarea>
+</div>
+{% endif %}
+
+{% if device.addition_date %}
+<div class="form-group row">
+<label for="colFormLabel" class="col-sm-3 text_form">Addition date</label>
+<textarea class="form-control col-sm-3 text-black input_form" id="colFormLabel" rows="1" readonly wrap="hard">{{ device.addition_date }}</textarea>
+</div>
+{% endif %}
+
+{% if device.modification_date %}
+<div class="form-group row">
+<label for="colFormLabel" class="col-sm-3 text_form">Modification date</label>
+<textarea class="form-control col-sm-3 text-black input_form" id="colFormLabel" rows="1" readonly wrap="hard">{{ device.modification_date }}</textarea>
+</div>
+{% endif %}
+
+
+<div class="form-group row ">
+<label for="colFormLabel" class="col-sm-3 text_form">Report Version</label>
+<textarea class="form-control col-sm-3 text-black input_form" id="colFormLabel" rows="1" readonly wrap="hard">{{ device.version }}</textarea>
+</div>
+
+{% if device.general_specs.all  %}
+<h2  style="font-weight: bold; font-size: 30px">General Specs</h2>
+<hr style="border: 1px solid gray; width: 13cm; margin: 0px "/><br/>
+{% endif %}
+{% for item in device.general_specs.all %}
+    <div class="form-group row">
+    <label for="colFormLabel" class="col-sm-3 text_form">{{item.name}}</label>
+    <textarea class="form-control col-sm-3 text-black input_form" id="colFormLabel" rows="1" readonly wrap="hard">{{ item.value }}</textarea>
+    </div>
+{% endfor %}
+    <br/>
+
+{% if device.technical_specs.all  %}
+<h2  style="font-weight: bold; font-size: 30px">Technical specs</h2>
+<hr style="border: 1px solid gray; width: 13cm; margin: 0px "/><br/>
+{% endif %}
+{% for item in device.technical_specs.all %}
+
+    <div class="form-group row">
+    <label for="colFormLabel" class="col-sm-3 text_form">{{item.name}}</label>
+    <textarea class="form-control col-sm-3 text-black input_form" id="colFormLabel" rows="1" readonly wrap="hard">{{ item.value }}</textarea>
+    </div>
+{% endfor %}
+</form>
+<br><br>
+<!--
+<button type="submit" class="button btn col-sm-3 " style="font-weight: bold ; background: black; border: black; color: white"
+        onclick="document.location.href = 'http://127.0.0.1:8000/techspecs/pdf/{{ device.id}}'">Print</button>
+-->
+</div>
+</div>
+
+{% endblock %}

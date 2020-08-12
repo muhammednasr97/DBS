@@ -4,28 +4,25 @@ from .models import Technical_Report, Technical_Specs, General_Specs, Technical_
 from django.core.files.storage import FileSystemStorage
 from django.db.models import Q
 import itertools
+from io import BytesIO
+from django.template.loader import get_template
+from xhtml2pdf import pisa
 from django.http import HttpResponse
-from .utils import render_to_pdf
 
 
-def search(request):
+def search_page(request):
     global lookups
     if request.method == 'GET':
         query = request.GET.get('q')
-
         submitbutton = request.GET.get('submit')
-
         if query is not None:
             if query == 'all':
                 all = Technical_Report.objects.all()
                 return render(request, 'techspecs/search.html', {'all': all})
-
             else:
                 lookups = Q(equipment_name__icontains=query) | Q(technology_level__icontains=query) \
-                          | Q(code__icontains=query)
-                print(lookups)
+                          | Q(code__icontains=query) | Q(speciality__icontains=query) | Q(facility_level__icontains=query)
                 results = Technical_Report.objects.filter(lookups).distinct()
-
                 context = {'results': results,
                            'submitbutton': submitbutton}
                 return render(request, 'techspecs/search.html', context)
@@ -35,9 +32,36 @@ def search(request):
         return render(request, 'techspecs/search.html')
 
 
-def detail(request, id):
+def search_allequipment(request):
+    global lookups
+    if request.method == 'GET':
+        query = request.GET.get('q')
+        submitbutton = request.GET.get('submit')
+        if query is not None:
+            lookups = Q(equipment_name__icontains=query)| Q(technology_level__icontains=query) \
+                          | Q(code__icontains=query) | Q(speciality__icontains=query) | Q(facility_level__icontains=query)
+            results = Technical_Report.objects.filter(lookups).distinct()
+            context = {'results': results, 'submitbutton': submitbutton}
+            return render(request, 'techspecs/all_equ_search.html', context)
+        else:
+            return render(request, 'techspecs/all_equipments.html')
+    else:
+        return render(request, 'techspecs/all_equipments.html')
+
+
+def radiology(request):
+    all = Technical_Report.objects.filter(speciality='Pathology')
+    return render(request, 'techspecs/speciality.html', {'all': all})
+
+
+def search_detail(request, id):
     device = get_object_or_404(Technical_Report, pk=id)
-    return render(request, 'techspecs/detail.html', {'device': device})
+    return render(request, 'techspecs/search_detail.html', {'device': device})
+
+
+def admin_detail(request, id):
+    device = get_object_or_404(Technical_Report, pk=id)
+    return render(request, 'techspecs/admin_detail.html', {'device': device})
 
 
 def add_equipment(request):
@@ -62,7 +86,7 @@ def add_equipment(request):
                                          purpose=request.POST.get('purpose', ''),
                                          picture=picture)
 
-            equipment_copy = Technical_Report_Copy(id=equipment.id,
+            equipment_copy = Technical_Report_Copy(
                                                    technology_level=request.POST.get('technology_level', ''),
                                                    facility_level=request.POST.get('facility_level', ''),
                                                    modification_date=request.POST.get('modification_date', ''),
@@ -73,28 +97,32 @@ def add_equipment(request):
                                                    speciality=request.POST.get('speciality', ''),
                                                    purpose=request.POST.get('purpose', ''),
                                                    picture=picture)
+            equipment_copy.id = equipment.id
+            equipment_copy.save()
+            equipment.save()
+            if name_general_list or name_technical_list or value_general_list or value_technical_list:
 
-            for gene_item in itertools.zip_longest(name_general_list, value_general_list):
-                general_spec = General_Specs(name=gene_item[0], value=gene_item[1])
-                general_spec.save()
-                general_specss = General_Specs.objects.get(pk=general_spec.id)
-                equipment.save()
-                equipment_copy.save()
-                equipment.general_specs.add(general_specss)
-                equipment_copy.general_specs.add(general_specss)
-                equipment.save()
-                equipment_copy.save()
+                for gene_item in itertools.zip_longest(name_general_list, value_general_list):
+                    general_spec = General_Specs(name=gene_item[0], value=gene_item[1])
+                    general_spec.save()
+                    general_specss = General_Specs.objects.get(pk=general_spec.id)
+                    equipment.save()
+                    equipment_copy.save()
+                    equipment.general_specs.add(general_specss)
+                    equipment_copy.general_specs.add(general_specss)
+                    equipment.save()
+                    equipment_copy.save()
 
-            for tech_item in itertools.zip_longest(name_technical_list, value_technical_list):
-                technical_spec = Technical_Specs(name=tech_item[0], value=tech_item[1])
-                technical_spec.save()
-                tech_specss = Technical_Specs.objects.get(pk=technical_spec.id)
-                equipment.save()
-                equipment_copy.save()
-                equipment.technical_specs.add(tech_specss)
-                equipment_copy.technical_specs.add(tech_specss)
-                equipment.save()
-                equipment_copy.save()
+                for tech_item in itertools.zip_longest(name_technical_list, value_technical_list):
+                    technical_spec = Technical_Specs(name=tech_item[0], value=tech_item[1])
+                    technical_spec.save()
+                    tech_specss = Technical_Specs.objects.get(pk=technical_spec.id)
+                    equipment.save()
+                    equipment_copy.save()
+                    equipment.technical_specs.add(tech_specss)
+                    equipment_copy.technical_specs.add(tech_specss)
+                    equipment.save()
+                    equipment_copy.save()
 
             messages.success(request, "Added Successfully")
             return redirect('http://127.0.0.1:8000/techspecs/allequipments/')
@@ -108,7 +136,7 @@ def add_equipment(request):
 
 
 def all_equipments(request):
-    all = Technical_Report.objects.all().order_by('version')
+    all = Technical_Report.objects.all().order_by('id')
     return render(request, 'techspecs/all_equipments.html', {'all': all})
 
 
@@ -119,11 +147,16 @@ def home(request):
 def about(request):
     return render(request, 'techspecs/about.html')
 
+def test(request):
+    return render(request, 'techspecs/JS.html')
+
 
 def delete(request, id):
     device = get_object_or_404(Technical_Report, pk=id)
+    #device_copy = get_object_or_404(Technical_Report_Copy, pk=id)
     if request.method == 'POST':
         device.delete()
+        #device_copy.delete()
         return redirect('http://127.0.0.1:8000/techspecs/allequipments/')
     return render(request, 'techspecs/delete.html', {'device': device})
 
@@ -228,6 +261,18 @@ def archive_view(request, id):
     new_device = Technical_Report.objects.get(pk=id)
     device = Technical_Report_Copy.objects.get(pk=id)
     return render(request, 'techspecs/compare.html', {'new_device': new_device, 'device': device})
+
+
+def render_to_pdf(template_src, context_dict=None):
+    if context_dict is None:
+        context_dict = {}
+    template = get_template(template_src)
+    html = template.render(context_dict)
+    result = BytesIO()
+    pdf = pisa.pisaDocument(BytesIO(html.encode("ISO-8859-1")), result)
+    if not pdf.err:
+        return HttpResponse(result.getvalue(), content_type='application/pdf')
+    return None
 
 
 def gen_pdf(request, id):

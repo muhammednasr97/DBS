@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="site-navbar py-2" style="background: lightgray">
+
+      <div class="search-wrap">
+        <div class="container">
+          <a href="#" class="search-close js-search-close"><span class="icon-close2"></span></a>
+          <form action="#" method="post">
+            <input type="text" class="form-control" placeholder="Search keyword and hit enter...">
+          </form>
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="d-flex align-items-center justify-content-between">
+          <div class="logo">
+            <div class="site-logo">
+              <a href="{% url 'home' %}" class="js-logo-clone">DBS</a>
+            </div>
+          </div>
+
+            <div class="main-nav d-none d-lg-block">
+            <nav class="site-navigation text-right text-md-center" role="navigation">
+              <ul class="site-menu js-clone-nav d-none d-lg-block">
+                <li><a href="{% url 'home' %}">Home</a></li>
+                <li><a href="{% url 'search' %}">Search</a></li>
+                <li class="active"><a href="{% url 'all_equipments' %}">Database</a></li>
+                <li><a href="{% url 'about' %}">About</a></li>
+              </ul>
+            </nav>
+          </div>
+            <div class="icons">
+            <lable>
+
+            </lable>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="py-3" >
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 mb-0">
+            <a href="{% url 'home' %}" style="color: #1d5987">Home</a> <span class="mx-2 mb-0" >/</span>
+            <strong class="text-black">Database</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+
+<div class="site-section text-body" >
+<div class="container">
+<h2 class="text-black">
+    <div class="row">
+    <label class="col-sm-8"><b>Medical Equipment</b></label>
+        <button class="col-sm-3 btn btn-black" onclick="document.location.href = 'http://127.0.0.1:8000/techspecs/addequipments/'">Add New Equipment</button>
+    </div>
+</h2>
+
+<form method="GET" action="{% url 'search_equipment' %}">
+<div class="input-group">
+    <input type="text" class="form-control col-sm-2" placeholder="Search" name="q" value="{{request.GET.q}}" style="height: 1.1cm"/>
+    <div class="input-group-append">
+      <button class="btn btn-secondary" type="submit" value="Search" name="submit">
+        <i class=" icon-search"></i>
+      </button>
+    </div>
+  </div>
+</form>
+
+<br/>
+<br/>
+
+{% if results %}
+<form style="border: 2px gray solid; border-radius: 15px; padding: 20px">
+{% if submitbutton == 'Search' and request.GET.q != '' %}
+    {% if results %}
+        {% for result in results %}
+            <div class=" row " >
+            <lable class="col-sm-6">
+            <a href="/techspecs/allequipments/{{ result.id }}" target="_top"><u class="text">{{result.equipment_name}}</u></a>
+            </lable>
+            <div class=" col-sm-6">
+              <button type="button" class="button btn " onclick="document.location.href = 'http://127.0.0.1:8000/techspecs/update/{{ result.id }}'">Update</button>
+              <button type="button" class="button btn" onclick="document.location.href = 'http://127.0.0.1:8000/techspecs/delete/{{ result.id }}'">Delete</button>
+              <button type="button" class="button btn"
+                      onclick="document.location.href = 'http://127.0.0.1:8000/techspecs/compare/{{ result.id}}'">Compare last 2 versions</button></div></div>
+        {% endfor %}
+    {% else %}
+        <p class="text-black" style="font-style: italic; font-weight: bold">No search results for this text.</p>
+    {% endif %}
+{% endif %}
+</form>
+{% endif %}
+
+
+</div>
+</div>
+
+{% endblock %}

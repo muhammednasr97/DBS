@@ -59,11 +59,35 @@
 <input type="text"  class="input  col-sm-6" style="text-transform: lowercase;text-align: left" name="q" value="{{request.GET.q}}" placeholder="Search"/>
 <input type="submit" style="border-radius: 25px" class="btn btn-black" name="submit" value="Search"/>
 </form>
+<br style="height: 2cm">
+<div class="row">
+<label style="width: 2cm"></label>
+<button type="button" class="btn filterbtn1 ">ENT</button>
+<button type="button" class="btn filterbtn1 ">Cardiology</button>
+<button type="button" class="btn filterbtn1 ">General Surgery</button>
+<button type="button" class="btn filterbtn1 ">General Hospital</button>
+</div>
+<div class="row">
+<label style="width: 1.5cm"></label>
+<button type="button" class="btn filterbtn2">Physical Medicine</button>
+<button type="button" class="btn filterbtn2 ">Anesthesiology</button>
+<button type="button" class="btn filterbtn2 ">Pulmonary Medicine</button>
+</div>
+
+<div class="row">
+<label style="width: 2cm"></label>
+<button type="button" class="btn filterbtn3" onclick="document.location.href = 'http://127.0.0.1:8000/techspecs/radiology'">Radiology</button>
+<button type="button" class="btn filterbtn3 ">Urology</button>
+<button type="button" class="btn filterbtn3 ">Clinical Laboratory</button>
+<button type="button" class="btn filterbtn3 ">Ophthalmology</button>
+</div>
+
 
 <!-- forrrrrrrrrr user if enter 'all' in the search -->
 {% for result in all %}
-    <br/>
-<a href="/techspecs/search/{{ result.id }}" target="_top" class="text"><u >{{result.equipment_name}}</u></a>
+<hr style="border-width: 2px; color: #23272b"/>
+<a href="/techspecs/search/{{ result.id }}" class="text1"><u >{{result.equipment_name}}</u></a><br>
+    <label style="color: #117a8b; font-size: 14px">{{result.speciality}}, {{ result.technology_level }}, {{ result.facility_level }}</label>
     <br/>
 {% endfor %}
 
@@ -71,11 +95,12 @@
 
 {% if submitbutton == 'Search' and request.GET.q != '' %}
     {% if results %}
-        <br/>
+        <hr style="border-width: 2px; color: #23272b"/>
         <h4 class="text-black" style="font-style: italic">Results for <b>"{{ request.GET.q }}"</b> </h4>
-        <br/>
         {% for result in results %}
-        <a href="/techspecs/search/{{ result.id }}" target="_blank" class="text"><u >{{result.equipment_name}}</u></a>
+            <br>
+        <a href="/techspecs/search/{{ result.id }}" class="text"><u >{{result.equipment_name}}</u></a><br>
+        <label style="color: #117a8b; font-size: 14px">{{result.speciality}}, {{ result.technology_level }}, {{ result.facility_level }}</label><br>
         {% endfor %}
 
     {% else %}
