@@ -2,7 +2,6 @@ from django.urls import path
 from django.conf.urls import url
 from . import views
 
-
 urlpatterns = [
     path('', views.home, name='home'),
     path('search/<str:id>/', views.search_detail, name='detail'),
@@ -19,5 +18,8 @@ urlpatterns = [
     path('compare/<str:id>/', views.archive_view, name='compare'),
     path('pdf/<str:id>/', views.gen_pdf, name='pdf'),
     path('test/', views.test, name='test'),
-    path('radiology/', views.radiology, name='specialty')
+    path('speciality/', views.speciality, name='specialty'),
+    path('register/', views.registerPage, name="register"),
+    path('login/', views.loginPage, name="login"),
+    path('logout/', views.logoutUser, name="logout"),
 ]

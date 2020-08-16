@@ -56,9 +56,15 @@
               </ul>
             </nav>
   </div>
-            <div class="icons">
-            <a href="#" class="icons-btn d-inline-block js-search-open"><span class="icon-search"></span></a>
-          </div>
+            {% if user.is_authenticated %}
+            <div>
+            <span class="text" style="font-size: 19px; text-transform: capitalize"> Welcome, {{ request.user }}  |  </span>
+            <span><a href="{% url 'logout' %}">Logout</a></span>
+            </div>
+        {% else %}
+            <span><a href="{% url 'login' %}">Sign In</a> | <a href="{% url 'register' %}">Sign Up</a></span>
+        {% endif %}
+
         </div>
       </div>
     </div>
@@ -99,22 +105,20 @@
 <label class="col-sm-3 text_form" for="colFormLabel">Speciality</label>
 <select class="col-sm-3 select" id="inlineFormCustomSelectPref" name="speciality" >
     <option  selected>{{ device.speciality }}</option>
-    <option value="Cardiology">Cardiology</option>
+    <option value="Cardiologypulmonary">Cardiologypulmonary</option>
     <option value="Obstetrics/Gynecology">Obstetrics/Gynecology</option>
     <option value="NICU">NICU</option>
     <option value="ENT">ENT</option>
-    <option value="Urology">Urology</option>
+    <option value="Gastroenterology/Urology">Gastroenterology/Urology</option>
     <option value="General Surgery">General Surgery</option>
     <option value="General Hospital">General Hospital</option>
-    <option value="Clinical Laboratory">Clinical Laboratory</option>
+    <option value="Laboratory">Laboratory</option>
     <option value="Ophthalmology">Ophthalmology</option>
-    <option value="Physical Medicine">Physical Medicine</option>
+    <option value="Physical Therapy">Physical Therapy</option>
     <option value="Radiology">Radiology</option>
-    <option value="Gastroenterology">Gastroenterology</option>
     <option value="Emergency">Emergency</option>
     <option value="Anesthesiology">Anesthesiology</option>
-    <option value="Pulmonary Medicine">Pulmonary Medicine</option>
-    <option value="ICU1">ICU</option>
+    <option value="ICU">ICU</option>
     <option value="Pathology">Pathology</option>
     <option value="Neurology3">Neurology</option>
 </select>
@@ -182,10 +186,12 @@
             <input class="col-sm-3 input_form" id="exampleFormControlFile3" name="gene_name" value="{{item.name}}" placeholder="Name">
             {% else %}
             <label class="col-sm-3"></label>
+            <label href="#" class="remove_field_Fgeneral col-sm-3 align-middle"
+                   style="color: black; text-decoration: underline; display: block; line-height: 50px">Remove</label>
             {% endif %}
 
             {% if item.value %}
-            <input class="col-sm-3 input_form" id="exampleFormControlFile3" name="gene_value" value="{{item.value}}" placeholder="Name">
+            <input class="col-sm-3 input_form" id="exampleFormControlFile3" name="gene_value" value="{{item.value}}" placeholder="Value">
             {% else %}
             <label class="col-sm-3"></label>
             {% endif %}
@@ -206,18 +212,17 @@
     <div class="form-group row col-md-12">
             {% if item.name %}
             <input class="col-sm-3 input_form" id="exampleFormControlFile3" name="tech_name" value="{{item.name}}" placeholder="Name">
-            {% else %}
-            <label class="col-sm-3"></label>
-            {% endif %}
-            {% if item.value %}
-            <input class="col-sm-3 input_form" id="exampleFormControlFile3" name="tech_name" value="{{item.value}}" placeholder="Name">
-            {% else %}
-            <label class="col-sm-3"></label>
-            {% endif %}
-            {% if item.name %}
+            <input class="col-sm-3 input_form" id="exampleFormControlFile3" name="tech_value" value="{{item.value}}" placeholder="Value">
             <label href="#" class="remove_field_technical col-sm-3 align-middle"
                    style="color: black; text-decoration: underline; display: block; line-height: 50px">Remove</label>
-            {%endif %}
+            {% else %}
+            <input class="col-sm-3 input_form" id="exampleFormControlFile3" name="tech_name"
+                   style="background: lightgrey; border: lightgray" readonly value="" placeholder="">
+            <input class="col-sm-3 input_form" id="exampleFormControlFile3" name="tech_value" value="{{item.value}}" placeholder="Value">
+            <label href="#" class="remove_field_Ftechnical col-sm-3 align-middle"
+                   style="color: black; text-decoration: underline; display: block; line-height: 50px">Remove</label>
+            {% endif %}
+
     </div>
 {% endfor %}
 </div>

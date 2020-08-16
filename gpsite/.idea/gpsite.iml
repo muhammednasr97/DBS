@@ -25,6 +25,7 @@
     <orderEntry type="library" name="datepicker" level="application" />
     <orderEntry type="library" name="jquery.datetimepicker" level="application" />
     <orderEntry type="library" name="jquery.datetimepicker.full" level="application" />
+    <orderEntry type="library" name="all" level="application" />
   </component>
   <component name="TemplatesService">
     <option name="TEMPLATE_CONFIGURATION" value="Django" />

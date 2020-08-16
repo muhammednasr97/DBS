@@ -32,11 +32,15 @@
                 </nav>
               </div>
 
-            <div class="icons">
-            <label>
+            {% if user.is_authenticated %}
+            <div>
+            <span class="text" style="font-size: 19px; text-transform: capitalize"> Welcome, {{ request.user }}  |  </span>
+            <span><a href="{% url 'logout' %}">Logout</a></span>
+            </div>
+        {% else %}
+            <span><a href="{% url 'login' %}">Sign In</a> | <a href="{% url 'register' %}">Sign Up</a></span>
+        {% endif %}
 
-            </label>
-          </div>
         </div>
       </div>
 </div>
@@ -80,42 +84,54 @@
 <textarea class="form-control col-sm-6 text-black input_form" id="colFormLabel" rows="1" readonly wrap="hard">{{ device.version }}</textarea>
 </div>
 
+{% if device.code %}
 <div class="form-group row ">
 <label for="colFormLabel" class="col-sm-5 text_form">Code</label>
 <textarea class="form-control col-sm-6 text-black input_form" id="colFormLabel" rows="1" readonly wrap="hard">{{ device.code }}</textarea>
 </div>
+{% endif %}
 
+{% if device.equipment_name %}
 <div class="form-group row">
 <label for="colFormLabel" class="col-sm-5 text_form">Name</label>
 <textarea class="form-control col-sm-6 text-black input_form" id="colFormLabel" rows="1" readonly wrap="hard" >{{ device.equipment_name }}</textarea>
 </div>
+{% endif %}
 
+{% if device.speciality %}
 <div class="form-group row">
 <label for="colFormLabel" class="col-sm-5 text_form">Speciality</label>
 <textarea class="form-control col-sm-6 text-black input_form" id="colFormLabel" rows="1" readonly wrap="hard">{{ device.speciality }}</textarea>
 </div>
+{% endif %}
 
-
+{% if device.technology_level %}
 <div class="form-group row">
 <label for="colFormLabel" class="col-sm-5 text_form">Technology Level</label>
 <textarea class="form-control col-sm-6 text-black input_form" id="colFormLabel" rows="1" readonly wrap="hard">{{ device.technology_level }}</textarea>
 </div>
+{% endif %}
 
-
+{% if device.facility_level %}
 <div class="form-group row">
-<label for="colFormLabel" class="col-sm-5 text_form">Facility Level Of Care</label>
+<label for="colFormLabel" class="col-sm-5 text_form">Facility Level </label>
 <textarea class="form-control col-sm-6 text-black input_form" id="colFormLabel" rows="1" readonly wrap="hard">{{ device.facility_level }}</textarea>
 </div>
+{% endif %}
 
+{% if device.addition_date %}
 <div class="form-group row">
 <label for="colFormLabel" class="col-sm-5 text_form">Addition date</label>
 <textarea class="form-control col-sm-6 text-black input_form" id="colFormLabel" rows="1" readonly wrap="hard">{{ device.addition_date }}</textarea>
 </div>
+{% endif %}
 
+{% if device.modification_date %}
 <div class="form-group row">
 <label for="colFormLabel" class="col-sm-5 text_form">Modification date</label>
 <textarea class="form-control col-sm-6 text-black input_form" id="colFormLabel" rows="1" readonly wrap="hard">{{ device.modification_date }}</textarea>
 </div>
+{% endif %}
 
 {% if device.general_specs.all  %}
 <h2  style="font-weight: bold; font-size: 30px">General Specs</h2>
@@ -145,10 +161,12 @@
 <h2  style="font-weight: bold; font-size: 30px">Picture</h2>
 <hr style="border: 1px solid gray; width: 13cm; margin: 0px "/><br/>
 <div class="card1" >
-  <img src="{{ device.picture.url }}" class="card-img" alt="Image" style="border-radius: 20px">
-  <div class="card-body container" style="background: gray;border-radius: 15px;" >
+  <img src="{{ device.picture.url }}" class="card-img" alt="Image" style="border-radius: 20px; height: 350px">
+  {% if device.purpose %}
+    <div class="card-body container" style="background: gray;border-radius: 15px;" >
     <p class=" text_form"  style="color: #0b0b0b; font-size: 18px">{{device.purpose }}</p>
   </div>
+  {% endif %}
 </div>
 
 </form>
@@ -156,16 +174,8 @@
 
   <div class="column" style="background-color:lightgray; border: 2px solid lightgray;border-radius: 15px;">
     <form class="text-black" style="padding-left: 50px ">
-<!-- here are the image and form for display the equipment details -->
 
-<!--
-<div class="card" >
-  <img src="{{ archive_device.picture.url }}" class="card-img" alt="Image" style="border-radius: 20px">
-  <div class="card-body container" style="background: gray;border-radius: 15px;" >
-    <p class=" text_form"  style="color: #0b0b0b; font-size: 18px">{{ archive_device.purpose }}</p>
-  </div>
-</div>
--->
+
 <div class="form-group row ">
 <label for="colFormLabel"  style="text-align: center; font-size: 35px;"  class="col-sm-10 text_form">New</label>
 </div>
@@ -175,42 +185,54 @@
 <textarea class="form-control col-sm-6 text-black input_form" id="colFormLabel" rows="1" readonly wrap="hard">{{ new_device.version }}</textarea>
 </div>
 
+{% if new_device.code %}
 <div class="form-group row ">
 <label for="colFormLabel" class="col-sm-5 text_form">Code</label>
 <textarea class="form-control col-sm-6 text-black input_form" id="colFormLabel" rows="1" readonly wrap="hard">{{ new_device.code }}</textarea>
 </div>
+{% endif %}
 
+{% if new_device.equipment_name %}
 <div class="form-group row">
 <label for="colFormLabel" class="col-sm-5 text_form">Name</label>
 <textarea class="form-control col-sm-6 text-black input_form" id="colFormLabel" rows="1" readonly wrap="hard" >{{ new_device.equipment_name }}</textarea>
 </div>
+{% endif %}
 
+{% if new_device.speciality %}
 <div class="form-group row">
 <label for="colFormLabel" class="col-sm-5 text_form">Speciality</label>
 <textarea class="form-control col-sm-6 text-black input_form" id="colFormLabel" rows="1" readonly wrap="hard">{{ new_device.speciality }}</textarea>
 </div>
+{% endif %}
 
-
+{% if new_device.technology_level %}
 <div class="form-group row">
 <label for="colFormLabel" class="col-sm-5 text_form">Technology Level</label>
 <textarea class="form-control col-sm-6 text-black input_form" id="colFormLabel" rows="1" readonly wrap="hard">{{ new_device.technology_level }}</textarea>
 </div>
+{% endif %}
 
-
+{% if new_device.facility_level %}
 <div class="form-group row">
-<label for="colFormLabel" class="col-sm-5 text_form">Facility Level Of Care</label>
+<label for="colFormLabel" class="col-sm-5 text_form">Facility Level </label>
 <textarea class="form-control col-sm-6 text-black input_form" id="colFormLabel" rows="1" readonly wrap="hard">{{ new_device.facility_level }}</textarea>
 </div>
+{% endif %}
 
+{% if new_device.addition_date %}
 <div class="form-group row">
 <label for="colFormLabel" class="col-sm-5 text_form">Addition date</label>
 <textarea class="form-control col-sm-6 text-black input_form" id="colFormLabel" rows="1" readonly wrap="hard">{{ new_device.addition_date }}</textarea>
 </div>
+{% endif %}
 
+{% if new_device.modification_date %}
 <div class="form-group row">
 <label for="colFormLabel" class="col-sm-5 text_form">Modification date</label>
 <textarea class="form-control col-sm-6 text-black input_form" id="colFormLabel" rows="1" readonly wrap="hard">{{ new_device.modification_date }}</textarea>
 </div>
+{% endif %}
 
 {% if new_device.general_specs.all  %}
 <h2  style="font-weight: bold; font-size: 30px">General Specs</h2>
@@ -230,7 +252,6 @@
 {% endif %}
 
 {% for item in new_device.technical_specs.all %}
-
     <div class="form-group row">
     <label for="colFormLabel" class="col-sm-5 text_form">{{item.name}}</label>
     <textarea class="form-control col-sm-6 text-black input_form" id="colFormLabel" rows="1" readonly wrap="hard">{{ item.value }}</textarea>
@@ -240,10 +261,12 @@
 <h2  style="font-weight: bold; font-size: 30px">Picture</h2>
 <hr style="border: 1px solid gray; width: 13cm; margin: 0px "/><br/>
 <div class="card1" >
-  <img src="{{ new_device.picture.url }}" class="card-img" alt="Image" style="border-radius: 20px">
+  <img src="{{ new_device.picture.url }}" class="card-img" alt="Image" style="border-radius: 20px; height: 350px">
+    {% if new_device.purpose %}
   <div class="card-body container" style="background: gray;border-radius: 15px;" >
     <p class=" text_form"  style="color: #0b0b0b; font-size: 18px">{{new_device.purpose }}</p>
   </div>
+    {% endif %}
 </div>
 
 </form>

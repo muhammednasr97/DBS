@@ -30,10 +30,16 @@
               </ul>
             </nav>
           </div>
-            <div class="icons">
-            <lable>
 
-            </lable>
+            {% if user.is_authenticated %}
+            <div>
+            <span class="text" style="font-size: 19px; text-transform: capitalize"> Welcome, {{ request.user }}  |  </span>
+            <span><a href="{% url 'logout' %}">Logout</a></span>
+            </div>
+        {% else %}
+            <span><a href="{% url 'login' %}">Sign In</a> | <a href="{% url 'register' %}">Sign Up</a></span>
+        {% endif %}
+
           </div>
         </div>
       </div>

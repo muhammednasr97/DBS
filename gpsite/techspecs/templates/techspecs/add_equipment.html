@@ -55,10 +55,16 @@
               </ul>
             </nav>
             </div>
-            <div class="icons">
-                <lable>
 
-                </lable>
+            {% if user.is_authenticated %}
+            <div>
+            <span class="text" style="font-size: 19px; text-transform: capitalize"> Welcome, {{ request.user }}  |  </span>
+            <span><a href="{% url 'logout' %}">Logout</a></span>
+            </div>
+        {% else %}
+            <span><a href="{% url 'login' %}">Sign In</a> | <a href="{% url 'register' %}">Sign Up</a></span>
+        {% endif %}
+
           </div>
         </div>
       </div>
@@ -106,23 +112,21 @@
 <div class="form-group row">
 <label class="col-sm-3 text_form" for="colFormLabel">Speciality</label>
 <select class="form-control col-sm-3 select" id="inlineFormCustomSelectPref" name="speciality" >
-    <option  selected>Choose Speciality...</option>
-    <option value="Cardiology">Cardiology</option>
+    <option >Choose Speciality...</option>
+    <option value="Cardiologypulmonary">Cardiologypulmonary</option>
     <option value="Obstetrics/Gynecology">Obstetrics/Gynecology</option>
     <option value="NICU">NICU</option>
     <option value="ENT">ENT</option>
-    <option value="Urology">Urology</option>
+    <option value="Gastroenterology/Urology">Gastroenterology/Urology</option>
     <option value="General Surgery">General Surgery</option>
     <option value="General Hospital">General Hospital</option>
-    <option value="Clinical Laboratory">Clinical Laboratory</option>
+    <option value="Laboratory">Laboratory</option>
     <option value="Ophthalmology">Ophthalmology</option>
-    <option value="Physical Medicine">Physical Medicine</option>
+    <option value="Physical Therapy">Physical Therapy</option>
     <option value="Radiology">Radiology</option>
-    <option value="Gastroenterology">Gastroenterology</option>
     <option value="Emergency">Emergency</option>
     <option value="Anesthesiology">Anesthesiology</option>
-    <option value="Pulmonary Medicine">Pulmonary Medicine</option>
-    <option value="ICU1">ICU</option>
+    <option value="ICU">ICU</option>
     <option value="Pathology">Pathology</option>
     <option value="Neurology3">Neurology</option>
 </select>
@@ -163,7 +167,7 @@
 
 <div class="form-group row">
 <label for="colFormLabel" class="col-sm-3 text_form">Report Version</label>
-    <input type="text" class="col-sm-3 input_form" id="exampleFormControlFile1" name="report_version" value="1" >
+    <input type="text" class="col-sm-3 input_form" id="exampleFormControlFile1" name="report_version" readonly value="1" >
 </div>
 
 <div class="form-group row" >

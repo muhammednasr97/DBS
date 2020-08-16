@@ -31,11 +31,16 @@
               </ul>
             </nav>
       </div>
-    <div class="icons">
-            <lable>
-                
-            </lable>
-          </div>
+
+        {% if user.is_authenticated %}
+            <div>
+            <span class="text" style="font-size: 19px; text-transform: capitalize"> Welcome, {{ request.user }}  |  </span>
+            <span><a href="{% url 'logout' %}">Logout</a></span>
+            </div>
+        {% else %}
+            <span><a href="{% url 'login' %}">Sign In</a> | <a href="{% url 'register' %}">Sign Up</a></span>
+        {% endif %}
+
         </div>
       </div>
 </div>
@@ -62,26 +67,40 @@
 <br style="height: 2cm">
 <div class="row">
 <label style="width: 2cm"></label>
-<button type="button" class="btn filterbtn1 ">ENT</button>
-<button type="button" class="btn filterbtn1 ">Cardiology</button>
-<button type="button" class="btn filterbtn1 ">General Surgery</button>
-<button type="button" class="btn filterbtn1 ">General Hospital</button>
+<button type="button" class="btn filterbtn1 " >Cardiopulmonary</button>
+<button type="button" class="btn filterbtn1 " >General Surgery</button>
+<button type="button" class="btn filterbtn1 " >General Hospital</button>
 </div>
 <div class="row">
-<label style="width: 1.5cm"></label>
-<button type="button" class="btn filterbtn2">Physical Medicine</button>
-<button type="button" class="btn filterbtn2 ">Anesthesiology</button>
-<button type="button" class="btn filterbtn2 ">Pulmonary Medicine</button>
+<label style="width: 2.5cm"></label>
+<button type="button" class="btn filterbtn2" >Physical Therapy</button>
+<button type="button" class="btn filterbtn2 " >ENT</button>
+<button type="button" class="btn filterbtn2 " >Anesthesiology</button>
+<button type="button" class="btn filterbtn2 " >ICU</button>
 </div>
 
 <div class="row">
 <label style="width: 2cm"></label>
-<button type="button" class="btn filterbtn3" onclick="document.location.href = 'http://127.0.0.1:8000/techspecs/radiology'">Radiology</button>
+<button type="button" class="btn filterbtn3">Radiology</button>
 <button type="button" class="btn filterbtn3 ">Urology</button>
-<button type="button" class="btn filterbtn3 ">Clinical Laboratory</button>
-<button type="button" class="btn filterbtn3 ">Ophthalmology</button>
+<button type="button" class="btn filterbtn3 " onclick="document.location.href = 'http://127.0.0.1:8000/techspecs/speciality'">Laboratory</button>
+<button type="button" class="btn filterbtn3 " >Ophthalmology</button>
 </div>
 
+
+<!--
+{% if specialty %}
+{% for result in specialty %}
+    <hr style="border-width: 2px; color: #23272b"/>
+    <a href="/techspecs/search/{{ specialty.id }}" class="text"><u >{{specialty.equipment_name}}</u></a><br>
+    <br/>
+{% endfor %}
+{% else %}
+<hr style="border-width: 2px; color: #23272b"/>
+<br/>
+<p class="text" style="color: black"> There is no equipment with this speciality tile now </p>
+{% endif %}
+-->
 
 <!-- forrrrrrrrrr user if enter 'all' in the search -->
 {% for result in all %}

@@ -30,10 +30,16 @@
               </ul>
             </nav>
           </div>
-            <div class="icons">
-            <lable>
 
-            </lable>
+            {% if user.is_authenticated %}
+            <div>
+            <span class="text" style="font-size: 19px; text-transform: capitalize"> Welcome, {{ request.user }}  |  </span>
+            <span><a href="{% url 'logout' %}">Logout</a></span>
+            </div>
+        {% else %}
+            <span><a href="{% url 'login' %}">Sign In</a> | <a href="{% url 'register' %}">Sign Up</a></span>
+        {% endif %}
+
           </div>
         </div>
       </div>
@@ -87,12 +93,13 @@
               <button type="button" class="button btn" onclick="document.location.href = 'http://127.0.0.1:8000/techspecs/delete/{{ result.id }}'">Delete</button>
               <button type="button" class="button btn"
                       onclick="document.location.href = 'http://127.0.0.1:8000/techspecs/compare/{{ result.id}}'">Compare last 2 versions</button></div></div>
+            <br>
         {% endfor %}
-    {% else %}
-        <p class="text-black" style="font-style: italic; font-weight: bold">No search results for this text.</p>
     {% endif %}
 {% endif %}
 </form>
+{% else %}
+        <p class="text-black text" style=" font-weight: bold">No search results for "{{ request.GET.q }}"</p>
 {% endif %}
 
 

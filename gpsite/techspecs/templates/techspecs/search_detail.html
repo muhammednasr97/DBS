@@ -30,11 +30,14 @@
                 </nav>
               </div>
 
-            <div class="icons">
-            <lable>
-
-            </lable>
-          </div>
+            {% if user.is_authenticated %}
+            <div>
+            <span class="text" style="font-size: 19px; text-transform: capitalize"> Welcome, {{ request.user }}  |  </span>
+            <span><a href="{% url 'logout' %}">Logout</a></span>
+            </div>
+            {% else %}
+            <span><a href="{% url 'login' %}">Sign In</a> | <a href="{% url 'register' %}">Sign Up</a></span>
+            {% endif %}
         </div>
       </div>
 </div>
@@ -68,7 +71,7 @@
 
 <!-- here are the image and form for display the equipment details -->
 <div class="card" >
-  <img src="{{ device.picture.url }}" class="card-img" alt="Image" style="border-radius: 20px">
+  <img src="{{ device.picture.url }}" class="card-img" alt="Image" style="border-radius: 20px;  height: 350px">
     {% if device.purpose %}
   <div class="card-body container" style="background: gray;border-radius: 15px;" >
     <b style="color: black; font-size: 18px; font-weight: bold">Purpose:</b><p class=" text_form">{{ device.purpose }}</p>

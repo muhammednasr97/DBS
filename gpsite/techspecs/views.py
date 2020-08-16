@@ -1,5 +1,4 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from django.contrib import messages
 from .models import Technical_Report, Technical_Specs, General_Specs, Technical_Report_Copy
 from django.core.files.storage import FileSystemStorage
 from django.db.models import Q
@@ -8,6 +7,10 @@ from io import BytesIO
 from django.template.loader import get_template
 from xhtml2pdf import pisa
 from django.http import HttpResponse
+from django.contrib.auth import authenticate, login, logout
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+from .forms import CreateUserForm
 
 
 def search_page(request):
@@ -32,6 +35,16 @@ def search_page(request):
         return render(request, 'techspecs/search.html')
 
 
+def speciality(request):
+    lab = Technical_Report.objects.filter(speciality='Laboratory')
+    icu = Technical_Report.objects.filter(speciality='ICU')
+    gh = Technical_Report.objects.filter(speciality='General Hospital')
+    rd = Technical_Report.objects.filter(speciality='Radiology')
+    cp = Technical_Report.objects.filter(speciality='Cardiopulmonary')
+    return render(request, 'techspecs/speciality.html', {'lab': lab, 'icu': icu, 'gh': gh, 'rd': rd, 'cp' : cp})
+
+
+@login_required(login_url='login')
 def search_allequipment(request):
     global lookups
     if request.method == 'GET':
@@ -49,21 +62,17 @@ def search_allequipment(request):
         return render(request, 'techspecs/all_equipments.html')
 
 
-def radiology(request):
-    all = Technical_Report.objects.filter(speciality='Pathology')
-    return render(request, 'techspecs/speciality.html', {'all': all})
-
-
 def search_detail(request, id):
     device = get_object_or_404(Technical_Report, pk=id)
     return render(request, 'techspecs/search_detail.html', {'device': device})
 
-
+@login_required(login_url='login')
 def admin_detail(request, id):
     device = get_object_or_404(Technical_Report, pk=id)
     return render(request, 'techspecs/admin_detail.html', {'device': device})
 
 
+@login_required(login_url='login')
 def add_equipment(request):
     if request.method == 'POST':
         try:
@@ -86,7 +95,7 @@ def add_equipment(request):
                                          purpose=request.POST.get('purpose', ''),
                                          picture=picture)
 
-            equipment_copy = Technical_Report_Copy(
+            equipment_copy = Technical_Report_Copy(id=equipment.id,
                                                    technology_level=request.POST.get('technology_level', ''),
                                                    facility_level=request.POST.get('facility_level', ''),
                                                    modification_date=request.POST.get('modification_date', ''),
@@ -135,6 +144,7 @@ def add_equipment(request):
         return render(request, 'techspecs/add_equipment.html')
 
 
+@login_required(login_url='login')
 def all_equipments(request):
     all = Technical_Report.objects.all().order_by('id')
     return render(request, 'techspecs/all_equipments.html', {'all': all})
@@ -147,25 +157,29 @@ def home(request):
 def about(request):
     return render(request, 'techspecs/about.html')
 
+
 def test(request):
     return render(request, 'techspecs/JS.html')
 
 
+@login_required(login_url='login')
 def delete(request, id):
     device = get_object_or_404(Technical_Report, pk=id)
-    #device_copy = get_object_or_404(Technical_Report_Copy, pk=id)
+    device_copy = get_object_or_404(Technical_Report_Copy, pk=id)
     if request.method == 'POST':
         device.delete()
-        #device_copy.delete()
+        device_copy.delete()
         return redirect('http://127.0.0.1:8000/techspecs/allequipments/')
     return render(request, 'techspecs/delete.html', {'device': device})
 
 
+@login_required(login_url='login')
 def data_to_update(request, id):
     device = Technical_Report.objects.get(pk=id)
     return render(request, 'techspecs/update.html', {'device': device})
 
 
+@login_required(login_url='login')
 def edit(request, id, version):
     global picture
     data = Technical_Report.objects.get(pk=id)
@@ -192,18 +206,20 @@ def edit(request, id, version):
         device_copy.save()
         general_specss = General_Specs.objects.get(pk=general_spec.id)
         device_copy.general_specs.add(general_specss)
+        device_copy.save()
     for item in tech:
         technical_spec = Technical_Specs(name=item.name, value=item.value)
         technical_spec.save()
         device_copy.save()
         technical_specss = Technical_Specs.objects.get(pk=technical_spec.id)
         device_copy.technical_specs.add(technical_specss)
+        device_copy.save()
 
     device_copy.save()
 
-    data.general_specs.all().delete()
-    data.technical_specs.all().delete()
     device = Technical_Report.objects.get(pk=id)
+    device.general_specs.all().delete()
+    device.technical_specs.all().delete()
     if request.method == 'POST':
         try:
             if request.FILES.get('picture') is not None:
@@ -233,12 +249,14 @@ def edit(request, id, version):
                 general_spec.save()
                 general_specss = General_Specs.objects.get(pk=general_spec.id)
                 device.general_specs.add(general_specss)
+                device.save()
 
             for item in itertools.zip_longest(name_technical_list, value_technical_list):
                 technical_spec = Technical_Specs(name=item[0], value=item[1])
                 technical_spec.save()
                 technical_specss = Technical_Specs.objects.get(pk=technical_spec.id)
                 device.technical_specs.add(technical_specss)
+                device.save()
 
             device.save()
 
@@ -252,11 +270,13 @@ def edit(request, id, version):
         return render(request, 'techspecs/update.html', {'device': device})
 
 
+@login_required(login_url='login')
 def archive(request, id):
     device = get_object_or_404(Technical_Report, pk=id)
     return redirect('http://127.0.0.1:8000/techspecs/compare/' + str(device.id) + '')
 
 
+@login_required(login_url='login')
 def archive_view(request, id):
     new_device = Technical_Report.objects.get(pk=id)
     device = Technical_Report_Copy.objects.get(pk=id)
@@ -284,3 +304,42 @@ def gen_pdf(request, id):
         content = "inline; filename=%s" %(filename)
         response['Content-Disposition'] = content
         return response
+
+
+def registerPage(request):
+    if request.user.is_authenticated:
+        return redirect('home')
+    else:
+        form = CreateUserForm()
+        if request.method == 'POST':
+            form = CreateUserForm(request.POST)
+            if form.is_valid():
+                form.save()
+                user = form.cleaned_data.get('username')
+                messages.success(request, 'Account was created for ' + user)
+                return redirect('login')
+
+        context = {'form': form}
+        return render(request, 'techspecs/register.html', context)
+
+
+def loginPage(request):
+    if request.user.is_authenticated:
+        return redirect('home')
+    else:
+        if request.method == 'POST':
+            username = request.POST.get('username')
+            password = request.POST.get('password')
+            user = authenticate(request, username=username, password=password)
+            if user is not None:
+                login(request, user)
+                return redirect('home')
+            else:
+                messages.info(request, 'Username OR password is incorrect')
+        context = {}
+        return render(request, 'techspecs/login.html', context)
+
+
+def logoutUser(request):
+    logout(request)
+    return redirect('home')
