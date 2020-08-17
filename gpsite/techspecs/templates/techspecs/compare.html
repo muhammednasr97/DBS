@@ -158,6 +158,7 @@
     </div>
 {% endfor %}
 
+{% if device.picture %}
 <h2  style="font-weight: bold; font-size: 30px">Picture</h2>
 <hr style="border: 1px solid gray; width: 13cm; margin: 0px "/><br/>
 <div class="card1" >
@@ -168,6 +169,7 @@
   </div>
   {% endif %}
 </div>
+{% endif %}
 
 </form>
   </div>
@@ -258,6 +260,7 @@
     </div>
 {% endfor %}
 
+{% if new_device.picture %}
 <h2  style="font-weight: bold; font-size: 30px">Picture</h2>
 <hr style="border: 1px solid gray; width: 13cm; margin: 0px "/><br/>
 <div class="card1" >
@@ -268,6 +271,7 @@
   </div>
     {% endif %}
 </div>
+{% endif %}
 
 </form>
   </div>

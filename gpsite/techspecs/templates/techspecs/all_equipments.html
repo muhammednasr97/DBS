@@ -60,11 +60,23 @@
 <div class="container">
 <h2 class="text-black">
     <div class="row">
-    <label class="col-sm-8"><b>Medical Equipment</b></label>
+    <label class="col-sm-4"><b>Medical Equipment</b></label>
+        <form method="GET" action="{% url 'search_equipment' %}">
+    <div class="input-group">
+    <input type="text" class="form-control col-sm-12" placeholder="Search" name="q" value="{{request.GET.q}}" style="height: 1.1cm"/>
+    <div class="input-group-append">
+      <button class="btn btn-secondary " type="submit" value="Search" name="submit">
+        <i class=" icon-search"></i>
+      </button>
+    </div>
+  </div>
+</form>
+        <label class="col-sm-2"></label>
         <button class="col-sm-3 btn btn-black" onclick="document.location.href = 'http://127.0.0.1:8000/techspecs/addequipments/'">Add New Equipment</button>
     </div>
 </h2>
 
+<!--
 <form method="GET" action="{% url 'search_equipment' %}">
 <div class="input-group">
     <input type="text" class="form-control col-sm-2" placeholder="Search" name="q" value="{{request.GET.q}}" style="height: 1.1cm"/>
@@ -75,7 +87,7 @@
     </div>
   </div>
 </form>
-
+-->
 <br/>
 {% if all %}
 <form style="border: 2px gray solid; border-radius: 15px; padding: 20px">

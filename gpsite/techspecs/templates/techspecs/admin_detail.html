@@ -72,6 +72,7 @@
 
 
 <!-- here are the image and form for display the equipment details -->
+{% if device.picture %}
 <div class="card" >
   <img src="{{ device.picture.url }}" class="card-img" alt="Image" style="border-radius: 20px; height: 350px">
     {% if device.purpose %}
@@ -80,6 +81,7 @@
   </div>
     {% endif %}
 </div>
+{% endif %}
 
 {% if device.code %}
 <div class="form-group row ">

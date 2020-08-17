@@ -26,6 +26,18 @@
 <body>
 
 <div class="site-wrap">
+
+{% if messages %}
+{% for message in messages %}
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+{{ message }}
+<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+<span aria-hidden="true">&times;</span>
+</button>
+</div>
+{% endfor %}
+{% endif %}
+
 <div class="site-navbar py-2" style="background: lightgray">
 
       <div class="search-wrap">
@@ -171,12 +183,16 @@
     <input class="col-sm-3 input_form" id="datepicker2" name="modification_date" value="{{ device.modification_date }}">
 </div>
 
+
 <div class="form-group row" >
     <label for="colFormLabel" class="col-sm-3 text_form">Picture</label>
     <input type="file"  id="pic" name="picture" >
+    {% if device.picture %}
     <img src="/media/{{ device.picture }}" class="card">
-
+    {% endif %}
 </div>
+
+
 <hr style="border-width: 2px"/>
 <p class="text_form">General Specs</p>
 <div class="input_fields_wrap_general input_fields_wrap_Fgeneral">

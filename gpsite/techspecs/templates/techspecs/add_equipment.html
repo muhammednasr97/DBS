@@ -26,6 +26,18 @@
 <body>
 
 <div class="site-wrap">
+
+{% if messages %}
+{% for message in messages %}
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+{{ message }}
+<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+<span aria-hidden="true">&times;</span>
+</button>
+</div>
+{% endfor %}
+{% endif %}
+
 <div class="site-navbar py-2" style="background: lightgray">
 
       <div class="search-wrap">
@@ -97,11 +109,6 @@
 
     {% csrf_token %}
 
-<div class="form-group row">
-<label for="colFormLabel" class="col-sm-3 text_form">Code</label>
-    <input type="text" class="col-sm-3 input_form" id="exampleFormControlFile1" name="code" >
-        <label for="colFormLabel" class="col-sm-3 text_form" style="color: darkred">*</label>
-</div>
 
 <div class="form-group row">
 <label for="colFormLabel" class="col-sm-3 text_form">Name</label>
@@ -110,9 +117,15 @@
 </div>
 
 <div class="form-group row">
+<label for="colFormLabel" class="col-sm-3 text_form">Code</label>
+    <input type="text" class="col-sm-3 input_form" id="exampleFormControlFile1" name="code" >
+
+</div>
+
+<div class="form-group row">
 <label class="col-sm-3 text_form" for="colFormLabel">Speciality</label>
 <select class="form-control col-sm-3 select" id="inlineFormCustomSelectPref" name="speciality" >
-    <option >Choose Speciality...</option>
+    <option >No Specialty Selected </option>
     <option value="Cardiologypulmonary">Cardiologypulmonary</option>
     <option value="Obstetrics/Gynecology">Obstetrics/Gynecology</option>
     <option value="NICU">NICU</option>
@@ -173,7 +186,6 @@
 <div class="form-group row" >
     <label for="colFormLabel" class="col-sm-3 text_form">Picture</label>
     <input type="file" class="col-sm-3" id="exampleFormControlFile1" name="picture" >
-    <label for="colFormLabel" class="col-sm-3 text_form" style="color: darkred">*</label>
 </div>
 <hr style="border-width: 2px"/>
 <p class="text_form">General Specs</p>

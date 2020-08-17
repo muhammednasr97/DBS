@@ -76,9 +76,6 @@ def admin_detail(request, id):
 def add_equipment(request):
     if request.method == 'POST':
         try:
-            file = request.FILES['picture']
-            fs = FileSystemStorage()
-            picture = fs.save(file.name, file)
             name_general_list = request.POST.getlist('gene_name')
             value_general_list = request.POST.getlist('gene_value')
             name_technical_list = request.POST.getlist('tech_name')
@@ -93,7 +90,7 @@ def add_equipment(request):
                                          equipment_name=request.POST.get('equipment_name', ''),
                                          speciality=request.POST.get('speciality', ''),
                                          purpose=request.POST.get('purpose', ''),
-                                         picture=picture)
+                                         )
 
             equipment_copy = Technical_Report_Copy(id=equipment.id,
                                                    technology_level=request.POST.get('technology_level', ''),
@@ -105,36 +102,53 @@ def add_equipment(request):
                                                    equipment_name=request.POST.get('equipment_name', ''),
                                                    speciality=request.POST.get('speciality', ''),
                                                    purpose=request.POST.get('purpose', ''),
-                                                   picture=picture)
-            equipment_copy.id = equipment.id
-            equipment_copy.save()
-            equipment.save()
-            if name_general_list or name_technical_list or value_general_list or value_technical_list:
+                                                   )
 
-                for gene_item in itertools.zip_longest(name_general_list, value_general_list):
-                    general_spec = General_Specs(name=gene_item[0], value=gene_item[1])
-                    general_spec.save()
-                    general_specss = General_Specs.objects.get(pk=general_spec.id)
-                    equipment.save()
-                    equipment_copy.save()
-                    equipment.general_specs.add(general_specss)
-                    equipment_copy.general_specs.add(general_specss)
-                    equipment.save()
-                    equipment_copy.save()
+            if request.FILES.get('picture') is not None:
+                file = request.FILES['picture']
+                fs = FileSystemStorage()
+                picture = fs.save(file.name, file)
+                equipment.picture = picture
+                equipment_copy.picture = picture
+            else:
+                picture = None
+                equipment.picture = picture
+                equipment_copy.picture = picture
 
-                for tech_item in itertools.zip_longest(name_technical_list, value_technical_list):
-                    technical_spec = Technical_Specs(name=tech_item[0], value=tech_item[1])
-                    technical_spec.save()
-                    tech_specss = Technical_Specs.objects.get(pk=technical_spec.id)
-                    equipment.save()
-                    equipment_copy.save()
-                    equipment.technical_specs.add(tech_specss)
-                    equipment_copy.technical_specs.add(tech_specss)
-                    equipment.save()
-                    equipment_copy.save()
+            if equipment.equipment_name:
+                equipment_copy.save()
+                equipment.save()
+                messages.success(request, equipment.equipment_name + "Added Successfully")
 
-            messages.success(request, "Added Successfully")
-            return redirect('http://127.0.0.1:8000/techspecs/allequipments/')
+                if name_general_list or name_technical_list or value_general_list or value_technical_list:
+
+                    for gene_item in itertools.zip_longest(name_general_list, value_general_list):
+                        general_spec = General_Specs(name=gene_item[0], value=gene_item[1])
+                        general_spec.save()
+                        general_specss = General_Specs.objects.get(pk=general_spec.id)
+                        equipment.save()
+                        equipment_copy.save()
+                        equipment.general_specs.add(general_specss)
+                        equipment_copy.general_specs.add(general_specss)
+                        equipment.save()
+                        equipment_copy.save()
+
+                    for tech_item in itertools.zip_longest(name_technical_list, value_technical_list):
+                        technical_spec = Technical_Specs(name=tech_item[0], value=tech_item[1])
+                        technical_spec.save()
+                        tech_specss = Technical_Specs.objects.get(pk=technical_spec.id)
+                        equipment.save()
+                        equipment_copy.save()
+                        equipment.technical_specs.add(tech_specss)
+                        equipment_copy.technical_specs.add(tech_specss)
+                        equipment.save()
+                        equipment_copy.save()
+
+            else:
+                messages.success(request, "Equipment name is mandatory, check the form again")
+                return redirect('add_equipments')
+
+            return redirect('http://127.0.0.1:8000/techspecs/allequipments/' + str(equipment.id) + '')
 
         except Exception as e:
             print(e)
@@ -244,24 +258,28 @@ def edit(request, id, version):
             value_general_list = request.POST.getlist('gene_value')
             name_technical_list = request.POST.getlist('tech_name')
             value_technical_list = request.POST.getlist('tech_value')
-            for item in itertools.zip_longest(name_general_list, value_general_list):
-                general_spec = General_Specs(name=item[0], value=item[1])
-                general_spec.save()
-                general_specss = General_Specs.objects.get(pk=general_spec.id)
-                device.general_specs.add(general_specss)
+            if device.equipment_name:
                 device.save()
+                for item in itertools.zip_longest(name_general_list, value_general_list):
+                    general_spec = General_Specs(name=item[0], value=item[1])
+                    general_spec.save()
+                    general_specss = General_Specs.objects.get(pk=general_spec.id)
+                    device.general_specs.add(general_specss)
+                    device.save()
 
-            for item in itertools.zip_longest(name_technical_list, value_technical_list):
-                technical_spec = Technical_Specs(name=item[0], value=item[1])
-                technical_spec.save()
-                technical_specss = Technical_Specs.objects.get(pk=technical_spec.id)
-                device.technical_specs.add(technical_specss)
-                device.save()
+                for item in itertools.zip_longest(name_technical_list, value_technical_list):
+                    technical_spec = Technical_Specs(name=item[0], value=item[1])
+                    technical_spec.save()
+                    technical_specss = Technical_Specs.objects.get(pk=technical_spec.id)
+                    device.technical_specs.add(technical_specss)
+                    device.save()
+                messages.success(request, "Updated Successfully")
+                return redirect('http://127.0.0.1:8000/techspecs/allequipments/' + str(device.id) + '')
+            else:
+                messages.success(request, "Equipment name is mandatory, check the form again")
+                return redirect('http://127.0.0.1:8000/techspecs/update/' + str(device.id) + '')
 
-            device.save()
 
-            messages.success(request, "Updated Successfully")
-            return redirect('http://127.0.0.1:8000/techspecs/allequipments/')
         except Exception as e:
             print(e)
             messages.success(request, "Failed to update")
