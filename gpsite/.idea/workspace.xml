@@ -3,21 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="1b99b76d-3b29-4df7-b6b3-dd2888763ede" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/techspecs/images/product_06.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/techspecs/images/product_07_large.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/techspecs/images/products_1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/techspecs/images/shoe.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/techspecs/images/wave.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/techspecs/images/women.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/techspecs/templates/techspecs/about.html" beforeDir="false" afterPath="$PROJECT_DIR$/techspecs/templates/techspecs/about.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/techspecs/templates/techspecs/add_equipment.html" beforeDir="false" afterPath="$PROJECT_DIR$/techspecs/templates/techspecs/add_equipment.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/techspecs/templates/techspecs/admin_detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/techspecs/templates/techspecs/admin_detail.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/techspecs/templates/techspecs/all_equipments.html" beforeDir="false" afterPath="$PROJECT_DIR$/techspecs/templates/techspecs/all_equipments.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/techspecs/templates/techspecs/compare.html" beforeDir="false" afterPath="$PROJECT_DIR$/techspecs/templates/techspecs/compare.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/techspecs/templates/techspecs/search_detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/techspecs/templates/techspecs/search_detail.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/techspecs/templates/techspecs/update.html" beforeDir="false" afterPath="$PROJECT_DIR$/techspecs/templates/techspecs/update.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/techspecs/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/techspecs/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -166,6 +151,7 @@
       <workItem from="1597288565533" duration="20388000" />
       <workItem from="1597397557464" duration="11715000" />
       <workItem from="1597580943277" duration="14152000" />
+      <workItem from="1597737293682" duration="1071000" />
     </task>
     <servers />
   </component>
@@ -205,10 +191,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state width="1323" height="179" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1590970115240" />
-    <state x="379" y="188" key="com.intellij.ide.util.TipDialog" timestamp="1597580954844">
+    <state x="379" y="188" key="com.intellij.ide.util.TipDialog" timestamp="1597737313244">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="379" y="188" key="com.intellij.ide.util.TipDialog/0.0.1366.728@0.0.1366.728" timestamp="1597580954844" />
+    <state x="379" y="188" key="com.intellij.ide.util.TipDialog/0.0.1366.728@0.0.1366.728" timestamp="1597737313244" />
     <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1597585007711">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
